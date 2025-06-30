@@ -34,6 +34,7 @@ public class Flow_10 {
         File targetFile2 = new File(System.getProperty("user.dir")+"\\Validation_ScreenShot\\Android.png");
         Sourcefile2.renameTo(targetFile2);
         driver.navigate().back();
+        //driver.close();
         driver.quit();
         
         
