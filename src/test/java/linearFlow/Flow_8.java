@@ -1,3 +1,6 @@
+//For Government -> Contact Sales (Top Right)-> Fill Details ->
+//First Name , Last Name , Work Email , Mobile No, Org Type ( Non Govt), job title (Random), Org Name(Random) , Org Size ( 3rd One ) ,Country (Random ) -> 
+//Click on Request info -> Print the message on next page
 package linearFlow;
 
 import java.time.Duration;

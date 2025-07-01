@@ -1,3 +1,5 @@
+// 10 .Go bottom (Footer) -> Click on Apple logo -> Take Screen Shot -> Come back ->Click on google play -> 
+//take Screen shot (Save both to a folder ) .. -> For Validation that this links are working correctly
 package linearFlow;
 
 import java.io.File;

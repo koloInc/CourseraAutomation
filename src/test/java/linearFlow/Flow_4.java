@@ -1,3 +1,4 @@
+//INDIVIDUAL -> PARTNERS -> INDIA -> LOGO | NAME | LINK
 package linearFlow;
 
 import java.time.Duration;
