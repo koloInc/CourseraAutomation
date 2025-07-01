@@ -17,14 +17,15 @@ public class Flow_1 {
 		driver.get("https://www.coursera.org/");
 		driver.manage().window().maximize();
 		
-		WebElement search=driver.findElement(By.id("search-autocomplete-input"));
-		search.sendKeys("Web Development");
-		search.sendKeys(Keys.ENTER);
+		WebElement searchBar=driver.findElement(By.id("search-autocomplete-input"));
+		searchBar.sendKeys("Web Development");
+		searchBar.sendKeys(Keys.ENTER);
 		
 		//For More Languages
 		WebElement allLang=driver.findElement(By.cssSelector("button[aria-label='Show more Language options'] span[class='cds-button-label']"));
 		allLang.click();
 		
+		System.out.println(driver.getTitle());
 		//For ALl languages in list
 		List <WebElement> lang=driver.findElements(By.xpath("//*[@class=\"css-q5d1os\"]/div"));
 		for (WebElement ele: lang) {
@@ -47,7 +48,7 @@ public class Flow_1 {
 		}
 
 		//wait for loading element
-		WaitUtils.waitForDuration(driver, 5);
+		WaitUtils.waitForDuration(driver, 5); //to be implemented in @Test
 		
 		//Get card
 		List <WebElement> cards=driver.findElements(By.xpath("//*[@class='cds-ProductCard-gridCard']"));
