@@ -1,5 +1,10 @@
 package pageObjects;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -34,7 +39,11 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//a[@data-click-key='front_page.front_page_story.click.mobile_app_badges_android']")
     WebElement playStoreBadge;
-
+    
+    @FindBy(xpath="//*[@class=\"cds-9 rc-SubFooterSection lohp-rebrand css-0 cds-11 cds-grid-item cds-61\"]")
+    List<WebElement> footers;
+    
+    Map<String, String> footerList;
     //  Action Methods
 
     public void clickForBusiness() {
@@ -78,5 +87,37 @@ public class HomePage extends BasePage {
 
     public void takeScreenshotAndroid() {
         captureScreenshot("Android.png");
+    }
+    
+    public List<WebElement> getAllFooter() {
+    		return footers;
+    }
+    public String getFooterTitle(WebElement footer) {
+    		return footer.findElement(By.xpath("./p")).getText();
+    }
+    
+    public List<WebElement> getContentList(WebElement footer){
+	    	return footer.findElements(By.xpath(".//a"));
+    }
+    
+    public void getFooters(WebElement unit){
+//    		footerList=new HashMap<>();
+    			String valText=unit.getText();
+    			String valLink=unit.getAttribute("href");
+    			System.out.println(valText + "\t" + valLink);
+//    			footerList.put(valText, valLink);
+    		}
+    
+    public void getFooterData() {
+    		List<WebElement>footers= getAllFooter();
+    		for(WebElement footer:footers) {
+    			String title=getFooterTitle(footer);
+    			System.out.println(title);
+    			List<WebElement> units=getContentList(footer);
+    			for(WebElement unit:units) {
+    				getFooters(unit);
+    			}
+    		}
+    		
     }
 }
