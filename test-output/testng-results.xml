@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-02T12:23:43 IST" name="Suite" finished-at="2025-07-02T12:24:09 IST" duration-ms="26638">
+  <suite started-at="2025-07-02T13:53:11 IST" name="Default suite" finished-at="2025-07-02T13:54:03 IST" duration-ms="51847">
     <groups>
     </groups>
-    <test started-at="2025-07-02T12:23:43 IST" name="Test" finished-at="2025-07-02T12:24:09 IST" duration-ms="26638">
-      <class name="testCases.TC_001_CourseDetails">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testCases.TC_001_CourseDetails@7e3181aa]" started-at="2025-07-02T12:23:43 IST" name="setup" finished-at="2025-07-02T12:23:52 IST" duration-ms="9055" status="PASS">
+    <test started-at="2025-07-02T13:53:11 IST" name="Default test" finished-at="2025-07-02T13:54:03 IST" duration-ms="51847">
+      <class name="testCases.TC_010_AppStore_PlayStore">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testCases.TC_010_AppStore_PlayStore@1c1bbc4e]" started-at="2025-07-02T13:53:11 IST" name="setup" finished-at="2025-07-02T13:53:23 IST" duration-ms="11628" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="Courses()[pri:0, instance:testCases.TC_001_CourseDetails@7e3181aa]" started-at="2025-07-02T12:23:52 IST" name="Courses" finished-at="2025-07-02T12:24:09 IST" duration-ms="17187" status="PASS">
+        <test-method signature="take_screenShot_Apple_Android()[pri:0, instance:testCases.TC_010_AppStore_PlayStore@1c1bbc4e]" started-at="2025-07-02T13:53:23 IST" name="take_screenShot_Apple_Android" finished-at="2025-07-02T13:54:03 IST" duration-ms="40152" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Courses -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_001_CourseDetails@7e3181aa]" started-at="2025-07-02T12:24:09 IST" name="tearDown" finished-at="2025-07-02T12:24:09 IST" duration-ms="336" status="PASS">
+        </test-method> <!-- take_screenShot_Apple_Android -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_010_AppStore_PlayStore@1c1bbc4e]" started-at="2025-07-02T13:54:03 IST" name="tearDown" finished-at="2025-07-02T13:54:03 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- testCases.TC_001_CourseDetails -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+      </class> <!-- testCases.TC_010_AppStore_PlayStore -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

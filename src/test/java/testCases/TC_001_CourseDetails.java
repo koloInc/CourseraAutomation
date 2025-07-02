@@ -11,7 +11,7 @@ public class TC_001_CourseDetails extends BaseClass{
 	{
 		HomePage hp = new HomePage(driver);
 		hp.setSearchBar("Web Development");
-		hp.clickSearchBar();
+		hp.submitSearch();
 		
 		CoursePage page= new CoursePage (driver);
 		page.clickallLang();
