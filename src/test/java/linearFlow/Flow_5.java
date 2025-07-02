@@ -46,6 +46,29 @@ public class Flow_5 {
 		
 		System.out.println(driver.findElement(By.xpath("//div[@id=\"DegreeFilters\"]/div[2]/div[1]//span")).getText());
 		
+		List<WebElement> collegeCards = driver.findElements(By.xpath("//div[@data-test=\"TopProductsList\"]/div/div"));
+		for(WebElement ele: collegeCards)
+		{
+			/*WebElement collegeName = ele.findElement(By.xpath("//div[@class=\"cds-ProductCard-partnerInfo\"]"));
+			
+				System.out.println(collegeName.getText());
+			
+			WebElement collegeDegree = ele.findElement(By.xpath("//h3"));
+			
+				System.out.println(collegeDegree.getText());
+			
+			WebElement degreeDetails = ele.findElement(By.xpath("//div[@class='cds-ProductCard-body']"));
+			
+				System.out.println(degreeDetails.getText());
+			
+			WebElement dueDate = ele.findElement(By.xpath("//div[@class='cds-ProductCard-footer']"));
+			
+				System.out.println(dueDate.getText());
+			*/
+			System.out.println(ele.getText()+"\n");
+			
+			
+		}
 	}
 
 }

@@ -2,7 +2,6 @@ package pageObjects;
 
 import java.util.List;
 
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +17,9 @@ public class HomePage extends BasePage{
 	
 @FindBy(id="search-autocomplete-input")
 WebElement searchBar ;
+@FindBy(xpath="//a[normalize-space()='Online Degrees']")
+WebElement onlineDegree;
+
 @FindBy(css ="button[aria-label='Show more Language options'] span[class='cds-button-label']")
 WebElement allLang ;
 @FindBy(xpath="//*[@class='css-q5d1os']/div")
@@ -34,9 +36,14 @@ public void setSearchBar(String searchValue)
 	searchBar.sendKeys(searchValue);
 }
 
-public void clickearchBar()
+public void clickSearchBar()
 {
 	searchBar.sendKeys(Keys.ENTER);
+}
+
+public void clickOnlineDegree()
+{
+	onlineDegree.click();
 }
 
 public void clickallLang()
