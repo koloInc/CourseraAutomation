@@ -57,4 +57,9 @@ public class BaseClass {
 		
 		return (str+num+"@"+randomeString()+".com");
 	}
+	
+	public void navigateBack()
+	{
+		driver.navigate().back();
+	}
 }

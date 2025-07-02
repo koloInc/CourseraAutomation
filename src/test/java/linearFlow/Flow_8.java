@@ -19,6 +19,8 @@ public class Flow_8 {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
 		driver.get("https://www.coursera.org/");
+		
+		
 		WebElement forGovernment = driver.findElement(By.xpath("//a[@data-click-key='front_page.front_page_story.click.navigation_meta_nav_Government']"));
 		forGovernment.click();
 		WebElement contactSales = driver.findElement(By.xpath("//a[@data-click-key='ent_website._government.click.navigation_priority_cta']"));
