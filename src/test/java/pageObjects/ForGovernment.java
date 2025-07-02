@@ -52,7 +52,6 @@ public class ForGovernment extends BasePage {
     WebElement confirmationMessage;
 
     // Action Methods
-
     public void clickContactSales() {
         contactSales.click();
     }

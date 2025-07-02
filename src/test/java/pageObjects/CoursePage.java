@@ -35,7 +35,7 @@ public class CoursePage extends BasePage{
 	Map<String, Integer> languageMap;
 	
 	//Getting all languages in HashMap
-	public void getLanguages() {
+	public Map<String,Integer> getLanguages() {
 		languageMap = new HashMap<>();
 		Pattern pattern = Pattern.compile("^(.*)\\((\\d+)(?:,(\\d+))?\\)$");
 		for(WebElement ele: lang) {
@@ -48,7 +48,7 @@ public class CoursePage extends BasePage{
 				languageMap.put(name, Integer.parseInt(number));	
 			}
 		}
-//		return languageMap;
+		return languageMap;
 	}
 	
 	//Clicking on All Language Expansion
