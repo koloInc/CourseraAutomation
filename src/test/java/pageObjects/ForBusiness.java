@@ -1,0 +1,57 @@
+package pageObjects;
+
+import java.util.List;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class ForBusiness extends BasePage {
+
+    public ForBusiness(WebDriver driver) {
+        super(driver);
+    }
+
+    // Navigation
+    @FindBy(xpath = "//a[normalize-space()='For Teams']")
+    WebElement forTeams;
+
+    @FindBy(xpath = "(//a[@href='https://www.coursera.org/purchase/plan'])[1]")
+    WebElement getStarted;
+
+    @FindBy(id = "cds-react-aria-:R4ssqna:")
+    WebElement noOfUsers;
+
+    @FindBy(xpath = "//label[@for='billingType']/following-sibling::div/fieldset/span")
+    List<WebElement> paymentOptions;
+
+    @FindBy(xpath = "//div[@class='rc-TeamsPurchaseSummary vertical-box align-items-vertical-center rc-TeamsPurchaseSummary--redesign desktopOnly']")
+    WebElement purchaseSummary;
+
+    // Actions
+    public void clickForTeams() {
+        forTeams.click();
+    }
+
+    public void clickGetStarted() {
+        js.executeScript("arguments[0].scrollIntoView(false);", getStarted);
+        getStarted.click();
+    }
+
+    public void enterNumberOfUsers(int value) {
+        noOfUsers.sendKeys(String.valueOf(value));
+    }
+
+    public void selectQuarterlyPayment() {
+        for (WebElement option : paymentOptions) {
+            if (option.getText().contains("Quarterly")) {
+                option.click();
+                break;
+            }
+        }
+    }
+
+    public String getPurchaseSummary() {
+        return purchaseSummary.getText();
+    }
+}
+	

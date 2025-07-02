@@ -3,6 +3,7 @@ package pageObjects;
 import java.io.File;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -19,12 +20,15 @@ public class HomePage extends BasePage{
 		super(driver);
 	}
 
-	JavascriptExecutor js = (JavascriptExecutor) driver;
 	TakesScreenshot ts = (TakesScreenshot)driver;
 	
 //Search Bar
 @FindBy(id="search-autocomplete-input")
 WebElement searchBar ;
+
+//For Business
+@FindBy(xpath="//a[@data-click-key='front_page.front_page_story.click.navigation_meta_nav_Business']")
+WebElement forBusiness;
 
 //For Government
 @FindBy(xpath="//a[@data-click-key='front_page.front_page_story.click.navigation_meta_nav_Government']")
@@ -53,10 +57,19 @@ List <WebElement> level ;
 @FindBy(xpath="//*[@class='cds-ProductCard-gridCard']")
 List<WebElement> cards ;
 
+//Action Methods
+
+public void clickForBusiness()
+{
+	forBusiness.click();
+}
+
+
 public void clickForGovernment()
 {
 	forGovernment.click();
 }
+
 
 public void setSearchBar(String searchValue)
 {

@@ -17,13 +17,14 @@ public class Flow_6 {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		driver.get("https://www.coursera.org/");
 		WebElement forBusiness = driver.findElement(By.xpath("//a[@data-click-key='front_page.front_page_story.click.navigation_meta_nav_Business']"));
 		forBusiness.click();
 		WebElement forTeams = driver.findElement(By.xpath("//a[normalize-space()='For Teams']"));
 		forTeams.click();
 		WebElement getStarted = driver.findElement(By.xpath("(//a[@href='https://www.coursera.org/purchase/plan'])[1]"));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		
         js.executeScript("arguments[0].scrollIntoView(false);", getStarted);
         getStarted.click();
         WebElement noOfUsers = driver.findElement(By.id("cds-react-aria-:R4ssqna:"));
