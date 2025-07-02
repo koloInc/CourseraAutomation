@@ -19,11 +19,11 @@ public class Flow_4 {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
 		driver.get("https://www.coursera.org/");
-		WebElement partner = driver.findElement(By.xpath("//*[@id='rendered-content']/div/main/section[1]/h2/div/a"));		
+		WebElement partners = driver.findElement(By.xpath("//*[@id='rendered-content']/div/main/section[1]/h2/div/a"));		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(false);", partner);
+        js.executeScript("arguments[0].scrollIntoView(false);", partners);
         //partner.click();
-        partner.sendKeys(Keys.ENTER);
+        partners.sendKeys(Keys.ENTER);
         WebElement country = driver.findElement(By.xpath("//a[normalize-space()='India']"));
         js.executeScript("arguments[0].scrollIntoView(false);", country);
         country.click();

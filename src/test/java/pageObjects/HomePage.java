@@ -1,10 +1,7 @@
 package pageObjects;
 
-import java.io.File;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +24,9 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//a[normalize-space()='Online Degrees']")
     WebElement onlineDegree;
+    
+    @FindBy(xpath="//*[@id='rendered-content']/div/main/section[1]/h2/div/a")
+    WebElement partners;
 
     //  Mobile Store Badges
     @FindBy(xpath = "//a[@data-click-key='front_page.front_page_story.click.mobile_app_badges_ios']")
@@ -55,6 +55,11 @@ public class HomePage extends BasePage {
 
     public void clickOnlineDegree() {
         onlineDegree.click();
+    }
+    
+    public void clickPartners() {
+        scrollIntoView(partners);
+        partners.sendKeys(Keys.ENTER);
     }
 
     public void clickAppStore() {

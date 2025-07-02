@@ -29,7 +29,7 @@ public class Flow_7 {
 		
 		//
 		Set<String>win=driver.getWindowHandles();
-		ArrayList windows=new ArrayList(win);
+		List windows=new ArrayList(win);
 		
 		//Switching to new tab
 		for(Object w:windows) {

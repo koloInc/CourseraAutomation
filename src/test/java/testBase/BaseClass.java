@@ -4,8 +4,10 @@ import java.time.Duration;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -37,7 +39,7 @@ public class BaseClass {
 		return generatedString;
 	}
 	
-	public String randomeNumber()
+	public String randomNumber()
 	{
 		String generatedString=RandomStringUtils.randomNumeric(10);
 		return generatedString;
@@ -71,4 +73,12 @@ public class BaseClass {
 	{
 		driver.navigate().back();
 	}
+	
+	public void pressTabKey() 
+	{
+	    Actions act = new Actions(driver);
+	    act.keyDown(Keys.TAB).keyUp(Keys.TAB).perform();
+	}
+
+	
 }

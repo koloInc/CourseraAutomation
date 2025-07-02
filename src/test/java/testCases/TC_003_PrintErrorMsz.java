@@ -2,25 +2,26 @@ package testCases;
 
 import org.testng.annotations.Test;
 
+import pageObjects.ForBusiness;
 import pageObjects.ForGovernment;
 import pageObjects.HomePage;
 import testBase.BaseClass;
 
-public class TC_008_ForGovernment extends BaseClass{
+public class TC_003_PrintErrorMsz extends BaseClass {
 	
 	@Test
-	public void Government_Form()
+	public void email_phone_error()
 	{
 		HomePage hp = new HomePage(driver);
-		hp.clickForGovernment();
+		hp.clickForBusiness();
+		
 		
 		ForGovernment fg = new ForGovernment(driver);
-		fg.clickContactSales();
 		fg.setFirstName(randomeString());
 		fg.setLastName(randomeString());
-		fg.setEmail(randomEmail());
-		fg.setMobileNo(randomNumber());
-		fg.selectOrgType(randomNumberInRange(1,2)); //Hard Coded
+		fg.setEmail(randomNumber());
+		fg.setMobileNo(randomAlphaNumeric());
+		fg.selectOrgType(randomNumberInRange(3,4)); //Hard Coded
 		fg.setJobTitle(randomeString()+randomeString());
 		fg.setOrgName(randomeString());
 		fg.selectOrgSize(randomNumberInRange(1,5)); // Hard Coded
@@ -28,7 +29,11 @@ public class TC_008_ForGovernment extends BaseClass{
 		fg.selectCountry("Israel"); //HardCoded
 		fg.clickRequestInfo();
 		
-		System.out.println(fg.getConfirmationMessage()); //Later Excel Write Conversion
+		ForBusiness fb = new ForBusiness(driver);
+		System.out.println(fb.getEmailError());
+		pressTabKey();
+		System.out.println(fb.getPoneError());
+		
 		
 	}
 
