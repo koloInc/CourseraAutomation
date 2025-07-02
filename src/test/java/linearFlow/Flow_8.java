@@ -42,7 +42,7 @@ public class Flow_8 {
 		orgName.sendKeys("SPOO Coimbatore");
 		WebElement orgSizeEle = driver.findElement(By.id("Employee_Range__c"));
 		Select orgSizeSelect = new Select(orgSizeEle);
-		orgSizeSelect.selectByValue("501-1000");
+		orgSizeSelect.selectByIndex(5);
 		WebElement aboutYouEle = driver.findElement(By.id("What_the_lead_asked_for_on_the_website__c"));
 		Select aboutYouSelect = new Select(aboutYouEle);
 		aboutYouSelect.selectByValue("Existing customer support");

@@ -73,8 +73,8 @@ public class ForGovernment extends BasePage {
         phoneNo.sendKeys(value);
     }
 
-    public void selectOrgType(String value) {
-        new Select(orgTypeEle).selectByValue(value);
+    public void selectOrgType(int value) {
+        new Select(orgTypeEle).selectByIndex(value);
     }
 
     public void setJobTitle(String value) {
@@ -85,12 +85,12 @@ public class ForGovernment extends BasePage {
         orgName.sendKeys(value);
     }
 
-    public void selectOrgSize(String value) {
-        new Select(orgSizeEle).selectByValue(value);
+    public void selectOrgSize(int value) {
+        new Select(orgSizeEle).selectByIndex(value);
     }
 
-    public void selectAboutYou(String value) {
-        new Select(aboutYouEle).selectByValue(value);
+    public void selectAboutYou(int value) {
+        new Select(aboutYouEle).selectByIndex(value);
     }
 
     public void selectCountry(String value) {

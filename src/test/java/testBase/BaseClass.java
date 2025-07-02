@@ -1,6 +1,7 @@
 package testBase;
 
 import java.time.Duration;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
@@ -41,6 +42,14 @@ public class BaseClass {
 		String generatedString=RandomStringUtils.randomNumeric(10);
 		return generatedString;
 	}
+	
+	public int randomNumberInRange(int min, int max) {
+        if (min > max) {
+            throw new IllegalArgumentException("Min should be less than or equal to Max");
+        }
+        int randomValue = ThreadLocalRandom.current().nextInt(min, max + 1);
+        return randomValue;
+    }
 	
 	public String randomAlphaNumeric()
 	{
