@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,6 +12,10 @@ public class BasePage {
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver,this);
+		
 	}
+	
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	
 	
 }
