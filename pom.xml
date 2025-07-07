@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>OpencartV121</groupId>
-  <artifactId>OpencartV121</artifactId>
+  <groupId>CourseraAutomation</groupId>
+  <artifactId>CourseraAutomation</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
   <build>
@@ -123,12 +123,6 @@
 	    <version>1.6.0</version>
 	</dependency>
 
-
-	<dependency>
-		<groupId>opencart_cucumber_framework</groupId>
-		<artifactId>opencart_cucumber_framework</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
   </dependencies>
 
 
