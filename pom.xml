@@ -122,8 +122,13 @@
 	    <artifactId>commons-email</artifactId>
 	    <version>1.6.0</version>
 	</dependency>
-	
 
+
+	<dependency>
+		<groupId>opencart_cucumber_framework</groupId>
+		<artifactId>opencart_cucumber_framework</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
 
 

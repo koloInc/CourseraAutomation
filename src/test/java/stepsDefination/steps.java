@@ -9,7 +9,7 @@ public class steps {
 	HomePage hp;
 	@Given("User is on homepage")
 	public void user_is_on_homepage() {
-		hp = new HomePage(driver);
+		hp = new HomePage();
 	}
 
 	@When("search course in search bar")
