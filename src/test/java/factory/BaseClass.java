@@ -13,7 +13,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-//import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -58,9 +57,6 @@ public class BaseClass {
              case "edge":
                  capabilities.setBrowserName("MicrosoftEdge");
                  break;
-//             case "firefox":
-//                 capabilities.setBrowserName("firefox");
-//                 break;
              default:
                  System.out.println("No matching browser");
                  return null;
@@ -79,9 +75,6 @@ public class BaseClass {
 			    case "edge":
 			    	driver=new EdgeDriver();
 			        break;
-//			    case "firefox":
-//			    	driver=new FirefoxDriver();
-//			        break;
 			    default:
 			        System.out.println("No matching browser");
 			        driver=null;
@@ -92,12 +85,11 @@ public class BaseClass {
 		 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
 		 
 		 return driver;
-		 
 	}
 	
 	public static WebDriver getDriver() {
 			return driver;
-		}
+	}
 
 	public static Properties getProperties() throws IOException
 	{		 

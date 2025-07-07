@@ -1,15 +1,20 @@
 package stepsDefination;
 
+import org.openqa.selenium.WebDriver;
+
+import factory.BaseClass;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.HomePage;
 
 public class steps {
+	WebDriver driver;
 	HomePage hp;
 	@Given("User is on homepage")
 	public void user_is_on_homepage() {
-		hp = new HomePage();
+		driver=BaseClass.getDriver();
+		hp = new HomePage(driver);
 	}
 
 	@When("search course in search bar")

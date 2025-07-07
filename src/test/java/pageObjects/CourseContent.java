@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class CourseContent extends BasePage{
 	String title;
-	List windows;
+	List<String> windows;
 	JavascriptExecutor js;
 	public CourseContent(WebDriver driver) {
 		super(driver);
@@ -66,7 +66,7 @@ public class CourseContent extends BasePage{
 	
 	public void getAllWindows() {
 		Set<String>win=driver.getWindowHandles();
-		windows=new ArrayList(win);
+		windows=new ArrayList<String>(win);
 	}
 	
 	public void switchToCoursePage() {

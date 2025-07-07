@@ -23,27 +23,24 @@ public class Hooks {
 	@Before
     public void setup() throws IOException
     {
-    	driver=BaseClass.initilizeBrowser();
-    	    	
-    	p=BaseClass.getProperties();
-    	driver.get(p.getProperty("appURL"));
-    	driver.manage().window().maximize();
-    			
+	    	driver=BaseClass.initilizeBrowser();
+	    	    	
+	    	p=BaseClass.getProperties();
+	    	driver.get(p.getProperty("appURL"));
+	    	driver.manage().window().maximize();
 	}
 		
 //	 After each step file
     @After
-    public void tearDown() {
-        		
-       driver.quit();
-       
+    public void tearDown() {	
+    		driver.quit();
     }
     
 //	After each method
     @AfterStep
     public void addScreenshot(Scenario scenario) {
-        
-    	// this is for cucumber junit report
+
+    		// this is for cucumber junit report
         if(scenario.isFailed()) {
         	
         	TakesScreenshot ts=(TakesScreenshot) driver;
