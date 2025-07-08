@@ -13,42 +13,43 @@ import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
-
 public class Hooks {
 
-	 WebDriver driver;
-	 Properties p;
- 
-//	 Before each step file
-	@Before
-    public void setup() throws IOException
-    {
-	    	driver=BaseClass.initilizeBrowser();
-	    	    	
-	    	p=BaseClass.getProperties();
-	    	driver.get(p.getProperty("appURL"));
-	    	driver.manage().window().maximize();
-	}
-		
-//	 After each step file
+    WebDriver driver;
+    Properties p;
+
+    @Before
+    public void setup() throws IOException {
+        driver = BaseClass.initilizeBrowser();         // Initialize browser
+        BaseClass.setDriver(driver);                   // ✅ Make it globally accessible
+        p = BaseClass.getProperties();
+        driver.get(p.getProperty("appURL"));
+        driver.manage().window().maximize();
+    }
+
     @After
-    public void tearDown() {	
-    		driver.quit();
+    public void tearDown() {
+        driver.quit();
     }
     
-//	After each method
-    @AfterStep
-    public void addScreenshot(Scenario scenario) {
-
-    		// this is for cucumber junit report
-        if(scenario.isFailed()) {
-        	
-        	TakesScreenshot ts=(TakesScreenshot) driver;
-        	byte[] screenshot=ts.getScreenshotAs(OutputType.BYTES);
-        	scenario.attach(screenshot, "image/png",scenario.getName());
-        	            
+    @After
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            System.out.println("❌ Scenario failed: " + scenario.getName());
+        } else {
+            System.out.println("✅ Scenario passed: " + scenario.getName());
         }
+
       
     }
-   
+
+
+    @AfterStep
+    public void addScreenshot(Scenario scenario) {
+        if (scenario.isFailed()) {
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", scenario.getName());
+        }
+    }
 }

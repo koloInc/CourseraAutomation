@@ -86,11 +86,12 @@ public class steps {
         card = cp.getCard(1);
     }
 
-    @Then("title rating and duration for second")
-    public void title_rating_and_duration_for_second() {
+    @Then("title rating and duration for second course are fetched")
+    public void title_rating_and_duration_for_second_course_are_fetched() {
         String title = cp.getTitle(card);
         String rating = cp.getRating(card);
         String duration = cp.getDuration(card);
         System.out.println(title + "__" + rating + "__" + duration);
     }
+
 }

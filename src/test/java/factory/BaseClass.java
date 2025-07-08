@@ -18,113 +18,106 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class BaseClass {
 
-		 static WebDriver driver;
-	     static Properties p;
-	     static Logger logger;
-	  	     
-	public static WebDriver initilizeBrowser() throws IOException
-	{
+	static WebDriver driver;
+	static Properties p;
+	static Logger logger;
+
+	public static WebDriver initilizeBrowser() throws IOException {
 		p = getProperties();
-        String executionEnv = p.getProperty("execution_env");
-        String browser = p.getProperty("browser").toLowerCase();
-        String os = p.getProperty("os").toLowerCase();
-		
-		if(executionEnv.equalsIgnoreCase("remote"))
-		{
+		String executionEnv = p.getProperty("execution_env");
+		String browser = p.getProperty("browser").toLowerCase();
+		String os = p.getProperty("os").toLowerCase();
+
+		if (executionEnv.equalsIgnoreCase("remote")) {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
-			
-			//os
-			 switch (os) {
-             case "windows":
-                 capabilities.setPlatform(Platform.WINDOWS);
-                 break;
-             case "mac":
-                 capabilities.setPlatform(Platform.MAC);
-                 break;
-             case "linux":
-                 capabilities.setPlatform(Platform.LINUX);
-                 break;
-             default:
-                 System.out.println("No matching OS");
-                 return null;
-            }
-			
-			//browser
-			 switch (browser) {
-             case "chrome":
-                 capabilities.setBrowserName("chrome");
-                 break;
-             case "edge":
-                 capabilities.setBrowserName("MicrosoftEdge");
-                 break;
-             default:
-                 System.out.println("No matching browser");
-                 return null;
-             }
-	       
-	        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),capabilities);
-			
-		}
-		else if(executionEnv.equalsIgnoreCase("local"))
-			{
-				switch(browser.toLowerCase()) 
-				{
-				case "chrome":
-			        driver=new ChromeDriver();
-			        break;
-			    case "edge":
-			    	driver=new EdgeDriver();
-			        break;
-			    default:
-			        System.out.println("No matching browser");
-			        driver=null;
-				}
+
+			// os
+			switch (os) {
+			case "windows":
+				capabilities.setPlatform(Platform.WINDOWS);
+				break;
+			case "mac":
+				capabilities.setPlatform(Platform.MAC);
+				break;
+			case "linux":
+				capabilities.setPlatform(Platform.LINUX);
+				break;
+			default:
+				System.out.println("No matching OS");
+				return null;
 			}
-		 driver.manage().deleteAllCookies(); 
-		 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
-		 
-		 return driver;
-	}
-	
-	public static WebDriver getDriver() {
-			return driver;
+
+			// browser
+			switch (browser) {
+			case "chrome":
+				capabilities.setBrowserName("chrome");
+				break;
+			case "edge":
+				capabilities.setBrowserName("MicrosoftEdge");
+				break;
+			default:
+				System.out.println("No matching browser");
+				return null;
+			}
+
+			driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+
+		} else if (executionEnv.equalsIgnoreCase("local")) {
+			switch (browser.toLowerCase()) {
+			case "chrome":
+				driver = new ChromeDriver();
+				break;
+			case "edge":
+				driver = new EdgeDriver();
+				break;
+			default:
+				System.out.println("No matching browser");
+				driver = null;
+			}
+		}
+		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+
+
+		return driver;
 	}
 
-	public static Properties getProperties() throws IOException
-	{		 
-        FileReader file=new FileReader(System.getProperty("user.dir")+"\\src\\test\\resources\\config.properties");
-       	p=new Properties();
+	public static WebDriver getDriver() {
+		return driver;
+	}
+	
+	public static void setDriver(WebDriver driverInstance) {
+	    driver = driverInstance;
+	}
+
+
+	public static Properties getProperties() throws IOException {
+		FileReader file = new FileReader(System.getProperty("user.dir") + "\\src\\test\\resources\\config.properties");
+		p = new Properties();
 		p.load(file);
 		return p;
 	}
-	
-	public static Logger getLogger() 
-	{		 
-		logger=LogManager.getLogger(); //Log4j
+
+	public static Logger getLogger() {
+		logger = LogManager.getLogger(); // Log4j
 		return logger;
 	}
-	
-	public static String randomeString()
-	{
-		String generatedString=RandomStringUtils.randomAlphabetic(5);
+
+	public static String randomeString() {
+		String generatedString = RandomStringUtils.randomAlphabetic(5);
 		return generatedString;
 	}
-	
-	
-	public static String randomeNumber()
-	{
-		String generatedString=RandomStringUtils.randomNumeric(10);
+
+	public static String randomeNumber() {
+		String generatedString = RandomStringUtils.randomNumeric(10);
 		return generatedString;
 	}
-	
-		
-	public static String randomAlphaNumeric()
-	{
-	String str=RandomStringUtils.randomAlphabetic(5);
-	 String num=RandomStringUtils.randomNumeric(10);
-	return str+num;
+
+	public static String randomAlphaNumeric() {
+		String str = RandomStringUtils.randomAlphabetic(5);
+		String num = RandomStringUtils.randomNumeric(10);
+		return str + num;
 	}
-	
-	
+
 }
