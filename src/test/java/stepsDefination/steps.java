@@ -2,6 +2,7 @@ package stepsDefination;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.en.*;
 import pageObjects.CoursePage;
@@ -17,7 +18,7 @@ public class steps {
 
     @Given("User is on homepage")
     public void user_is_on_homepage() throws Exception {
-        driver = BaseClass.initilizeBrowser();
+        driver = new ChromeDriver();
         hp = new HomePage(driver);
     }
 
