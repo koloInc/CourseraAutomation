@@ -14,6 +14,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -65,6 +66,16 @@ public class BaseClass {
         } else if (executionEnv.equals("local")) {
             switch (browser) {
                 case "chrome":
+                	
+                		ChromeOptions options = new ChromeOptions();
+                		
+                		options.addArguments("--headless=new");
+                		options.addArguments("--no-sandbox");
+                		options.addArguments("--disable-dev-shm-usage");
+
+                		String userDataDir = System.getProperty("java.io.tmpdir") + "/profile_" + System.currentTimeMillis();
+                		options.addArguments("--user-data-dir=" + userDataDir);
+
                     driver = new ChromeDriver();
                     break;
                 case "edge":
