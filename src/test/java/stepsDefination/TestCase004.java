@@ -7,28 +7,21 @@ import org.openqa.selenium.WebElement;
 
 import factory.BaseClass;
 import io.cucumber.java.en.*;
-import pageObjects.HomePage;
 import pageObjects.PartnersPage;
 
 public class TestCase004 {
 
     WebDriver driver;
-    HomePage homePage;
     PartnersPage partnersPage;
-
-    @Given("the user is on the homepage")
-    public void the_user_is_on_the_homepage() {
-        driver = BaseClass.getDriver();
-        homePage = new HomePage(driver);
-    }
 
     @Then("the user navigates to the Partners section")
     public void the_user_navigates_to_the_partners_section() {
-        homePage.clickPartners();
+        CommonSteps.homePage.clickPartners();
     }
 
     @And("opens the India Partners list")
     public void opens_the_india_partners_list() {
+        driver = BaseClass.getDriver();
         partnersPage = new PartnersPage(driver);
         partnersPage.openIndiaPartners();
     }

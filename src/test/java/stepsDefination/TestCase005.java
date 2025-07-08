@@ -6,24 +6,17 @@ import org.openqa.selenium.WebDriver;
 
 import factory.BaseClass;
 import io.cucumber.java.en.*;
-import pageObjects.HomePage;
 import pageObjects.OnlineDegrees;
 
 public class TestCase005 {
 
     WebDriver driver;
-    HomePage homePage;
     OnlineDegrees onlineDegrees;
-
-   /* @Given("the user is on the homepage")
-    public void the_user_is_on_the_homepage() {
-        driver = BaseClass.getDriver();
-        homePage = new HomePage(driver);
-    }*/
 
     @When("the user navigates to the Online Degrees section")
     public void the_user_navigates_to_the_online_degrees_section() {
-        homePage.clickOnlineDegree();
+        CommonSteps.homePage.clickOnlineDegree();
+        driver = BaseClass.getDriver();
         onlineDegrees = new OnlineDegrees(driver);
     }
 
