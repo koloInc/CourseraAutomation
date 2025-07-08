@@ -7,8 +7,10 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = {
+    		".\\features\\testCase3.feature",
+    		".\\features\\testCase4.feature",
     		".\\features\\testCase10.feature",
-    		".\\features\\testCase3.feature"
+    		
     		},
     glue = {
     		"stepsDefination",

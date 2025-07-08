@@ -7,7 +7,7 @@ import pageObjects.ForBusiness;
 import pageObjects.ForGovernment;
 import pageObjects.HomePage;
 
-public class TestCase3 {
+public class TestCase003 {
 
     WebDriver driver;
     HomePage homePage;

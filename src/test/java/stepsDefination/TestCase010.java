@@ -5,7 +5,7 @@ import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.HomePage;
 
-public class TestCase10 {
+public class TestCase010 {
 
     WebDriver driver;
     HomePage homePage;
