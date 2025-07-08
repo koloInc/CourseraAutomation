@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Install Chrome and ChromeDriver
+    - name: Install Chrome and matching ChromeDriver
       run: |
         sudo apt-get update
         sudo apt-get install -y wget unzip curl jq
@@ -41,12 +41,16 @@ jobs:
         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
         echo "Installed Chrome version: $CHROME_VERSION"
 
-        # Get matching ChromeDriver version
-        DRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r --arg ver "$CHROME_VERSION" '.channels.Stable.versions[] | select(.version | startswith($ver)) | .version' | head -1)
+        # Extract major version (e.g., 138)
+        MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1)
+        echo "Major version: $MAJOR_VERSION"
+
+        # Get latest compatible ChromeDriver version using CfT API
+        DRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_$MAJOR_VERSION")
         echo "Matching ChromeDriver version: $DRIVER_VERSION"
 
         # Download and install ChromeDriver
-        DRIVER_URL="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${DRIVER_VERSION}/linux64/chromedriver-linux64.zip"
+        DRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/$DRIVER_VERSION/linux64/chromedriver-linux64.zip"
         wget "$DRIVER_URL" -O chromedriver.zip
         unzip chromedriver.zip
         sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
