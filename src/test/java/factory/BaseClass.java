@@ -69,9 +69,9 @@ public class BaseClass {
                 	
                 		ChromeOptions options = new ChromeOptions();
                 		
-                		options.addArguments("--headless=new");
-                		options.addArguments("--no-sandbox");
-                		options.addArguments("--disable-dev-shm-usage");
+//                		options.addArguments("--headless=new");
+//                		options.addArguments("--no-sandbox");
+//                		options.addArguments("--disable-dev-shm-usage");
 
                 		String userDataDir = System.getProperty("java.io.tmpdir") + "/profile_" + System.currentTimeMillis();
                 		options.addArguments("--user-data-dir=" + userDataDir);
