@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-08T11:21:26 IST" name="Default suite" finished-at="2025-07-08T11:21:56 IST" duration-ms="29987">
+  <suite started-at="2025-07-08T22:31:53 IST" name="Default suite" finished-at="2025-07-08T22:32:42 IST" duration-ms="49096">
     <groups>
     </groups>
-    <test started-at="2025-07-08T11:21:26 IST" name="Default test" finished-at="2025-07-08T11:21:56 IST" duration-ms="29987">
+    <test started-at="2025-07-08T22:31:53 IST" name="Default test" finished-at="2025-07-08T22:32:42 IST" duration-ms="49096">
       <class name="testCases.TC_001_CourseDetails">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testCases.TC_001_CourseDetails@587e5365]" started-at="2025-07-08T11:21:26 IST" name="setup" finished-at="2025-07-08T11:21:35 IST" duration-ms="8411" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testCases.TC_001_CourseDetails@587e5365]" started-at="2025-07-08T22:31:53 IST" name="setup" finished-at="2025-07-08T22:32:18 IST" duration-ms="24559" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="Courses()[pri:0, instance:testCases.TC_001_CourseDetails@587e5365]" started-at="2025-07-08T11:21:35 IST" name="Courses" finished-at="2025-07-08T11:21:53 IST" duration-ms="18291" status="PASS">
+        <test-method signature="Courses()[pri:0, instance:testCases.TC_001_CourseDetails@587e5365]" started-at="2025-07-08T22:32:18 IST" name="Courses" finished-at="2025-07-08T22:32:39 IST" duration-ms="20568" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Courses -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_001_CourseDetails@587e5365]" started-at="2025-07-08T11:21:53 IST" name="tearDown" finished-at="2025-07-08T11:21:56 IST" duration-ms="3200" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_001_CourseDetails@587e5365]" started-at="2025-07-08T22:32:39 IST" name="tearDown" finished-at="2025-07-08T22:32:42 IST" duration-ms="3908" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
