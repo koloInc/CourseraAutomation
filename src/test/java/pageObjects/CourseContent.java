@@ -94,8 +94,18 @@ public class CourseContent extends BasePage{
 		return reviews().getText();
 	}
 	
-	public void clickViewMore() {
-		js.executeScript("arguments[0].click()", showBtn);
+	public void clickViewMore() {		try {
+			if (showBtn.isDisplayed()) {
+				scrollIntoView(showBtn);
+				jsClick(showBtn);
+				System.out.println("'View all skills' button clicked.");
+			} else {
+				System.out.println("'View all skills' button is not visible. Skipping click.");
+			}
+		} 
+		catch (org.openqa.selenium.NoSuchElementException e) {
+				System.out.println("'View all skills' button not found in DOM. Skipping click.");
+		} 
 	}
 	
 	public void setAllSkills() {
