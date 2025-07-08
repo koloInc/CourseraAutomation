@@ -76,7 +76,7 @@ public class BaseClass {
                 		String userDataDir = System.getProperty("java.io.tmpdir") + "/profile_" + System.currentTimeMillis();
                 		options.addArguments("--user-data-dir=" + userDataDir);
 
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver(options);
                     break;
                 case "edge":
                     driver = new EdgeDriver();
