@@ -5,24 +5,21 @@ import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.ForBusiness;
 import pageObjects.ForGovernment;
-import pageObjects.HomePage;
 
 public class TestCase003 {
 
     WebDriver driver;
-    HomePage homePage;
     ForGovernment forGovernment;
     ForBusiness forBusiness;
 
-    @Given("the user is on the homepage and navigates to the For Business section")
-    public void the_user_is_on_the_homepage_and_navigates_to_the_for_business_section() {
-        driver = BaseClass.getDriver();
-        homePage = new HomePage(driver);
-        homePage.clickForBusiness();
-    }
+    /*@Then("the user navigates to the For Business section")
+    public void the_user_navigates_to_the_for_business_section() {
+        CommonSteps.homePage.clickForBusiness();
+    }*/
 
     @When("the user fills out the government request form with invalid email and phone number")
     public void the_user_fills_out_the_government_request_form_with_invalid_email_and_phone_number() {
+        driver = BaseClass.getDriver();
         forGovernment = new ForGovernment(driver);
         forGovernment.setFirstName(BaseClass.randomeString());
         forGovernment.setLastName(BaseClass.randomeString());

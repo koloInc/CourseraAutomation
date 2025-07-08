@@ -7,9 +7,12 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = {
-    		
+    		".\\features\\testCase003.feature",
     		".\\features\\testCase004.feature",
     		".\\features\\testCase005.feature",
+    		".\\features\\testCase006.feature",
+    		".\\features\\testCase007.feature",
+    		".\\features\\testCase010.feature",
     		
     		
     		},
