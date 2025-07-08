@@ -28,23 +28,29 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Install Chrome and Xvfb
+    - name: Install Chrome and ChromeDriver
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget unzip xvfb
+        sudo apt-get install -y wget unzip curl jq
+
+        # Install Chrome
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
-    - name: Start Xvfb
-      run: |
-        export DISPLAY=:99
-        Xvfb :99 -screen 0 1920x1080x24 &
-      shell: bash
+        # Get Chrome version
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+        echo "Installed Chrome version: $CHROME_VERSION"
 
-    - name: Build with Maven
-      env:
-        DISPLAY: :99
+        # Get matching ChromeDriver version
+        DRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r --arg ver "$CHROME_VERSION" '.channels.Stable.versions[] | select(.version | startswith($ver)) | .version' | head -1)
+        echo "Matching ChromeDriver version: $DRIVER_VERSION"
+
+        # Download and install ChromeDriver
+        DRIVER_URL="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${DRIVER_VERSION}/linux64/chromedriver-linux64.zip"
+        wget "$DRIVER_URL" -O chromedriver.zip
+        unzip chromedriver.zip
+        sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
+        sudo chmod +x /usr/bin/chromedriver
+
+    - name: Run tests with Maven
       run: mvn clean verify -Dtestng.dtd.http=true
-
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
