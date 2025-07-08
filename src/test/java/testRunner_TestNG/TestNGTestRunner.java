@@ -6,15 +6,15 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
     features = {
-    		".\\features\\testCase001.feature",
-    		".\\features\\testCase002.feature",
-    		".\\features\\testCase003.feature",
-         ".\\features\\testCase004.feature",
-         ".\\features\\testCase005.feature",
-         ".\\features\\testCase006.feature",
-         ".\\features\\testCase007.feature",
-         ".\\features\\testCase008.feature",
-         ".\\features\\testCase010.feature"
+    		".//features//testCase001.feature",
+    		".//features//testCase002.feature",
+    		".//features//testCase003.feature",
+         ".//features//testCase004.feature",
+         ".//features//testCase005.feature",
+         ".//features//testCase006.feature",
+         ".//features//testCase007.feature",
+         ".//features//testCase008.feature",
+         ".//features//testCase010.feature"
     },
     glue = {
         "stepsDefination",
