@@ -24,7 +24,7 @@ public class TestCase006 {
         if (planType.equalsIgnoreCase("For Teams")) {
             forBusiness.clickForTeams();
         }
-        // You can extend this for other plan types if needed
+      
     }
 
     @When("enters a random number of users between {int} and {int}")

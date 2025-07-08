@@ -2,11 +2,9 @@ package testCases;
 
 import java.util.Map;
 
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import pageObjects.CoursePage;
-import pageObjects.HomePage;
 import testBase.BaseClass;
 
 public class TC_002_LanguagesList extends BaseClass{
