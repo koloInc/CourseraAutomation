@@ -1,4 +1,4 @@
-package stepsDefination;
+package hooks;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -20,18 +20,13 @@ public class Hooks {
 
     @Before
     public void setup() throws IOException {
-        driver = BaseClass.initilizeBrowser();         // Initialize browser
-        BaseClass.setDriver(driver);                   // ✅ Make it globally accessible
+        driver = BaseClass.initilizeBrowser();
+        BaseClass.setDriver(driver);
         p = BaseClass.getProperties();
         driver.get(p.getProperty("appURL"));
         driver.manage().window().maximize();
     }
 
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
-    
     @After
     public void tearDown(Scenario scenario) {
         if (scenario.isFailed()) {
@@ -40,16 +35,16 @@ public class Hooks {
             System.out.println("✅ Scenario passed: " + scenario.getName());
         }
 
-      
+        if (driver != null) {
+            driver.quit();
+        }
     }
-
 
     @AfterStep
     public void addScreenshot(Scenario scenario) {
-        if (scenario.isFailed()) {
-            TakesScreenshot ts = (TakesScreenshot) driver;
-            byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", scenario.getName());
+        if (scenario.isFailed() && driver != null) {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", "Failure Screenshot");
         }
     }
 }

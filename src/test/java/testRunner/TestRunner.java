@@ -6,8 +6,14 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = {"C:\\Users\\2403720\\eclipse-workspace\\CourseraAutomation\\features\\testCase10.feature"},
-    glue = {"stepsDefination"},
+    features = {
+    		".\\features\\testCase10.feature",
+    		".\\features\\testCase3.feature"
+    		},
+    glue = {
+    		"stepsDefination",
+    		"hooks"
+    		},
     plugin = {
         "pretty",
         "html:target/cucumber-reports",
