@@ -22,12 +22,12 @@ public class TestCase004 {
         homePage = new HomePage(driver);
     }
 
-    @When("the user navigates to the Partners section")
+    @Then("the user navigates to the Partners section")
     public void the_user_navigates_to_the_partners_section() {
         homePage.clickPartners();
     }
 
-    @When("opens the India Partners list")
+    @And("opens the India Partners list")
     public void opens_the_india_partners_list() {
         partnersPage = new PartnersPage(driver);
         partnersPage.openIndiaPartners();
