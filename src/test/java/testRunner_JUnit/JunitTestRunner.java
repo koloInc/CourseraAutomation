@@ -20,11 +20,12 @@ import io.cucumber.junit.CucumberOptions;
     		"stepsDefination",
     		"hooks"
     		},
-    plugin = {
-        "pretty",
-        "html:target/cucumber-reports",
-        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
-    },
+    		plugin = {
+    			    "pretty",
+    			    "html:test-output/cucumber-reports.html",
+    			    "json:test-output/cucumber.json",
+    			    "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+    			},
     monochrome = true
 //    dryRun = false,
 //    publish = true
