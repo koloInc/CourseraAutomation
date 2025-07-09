@@ -22,9 +22,11 @@ import org.testng.annotations.DataProvider;
         "hooks"
     },
     plugin = {
-        "pretty",
-        "html:target/cucumber-reports",
-        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+    		"pretty",
+            "html:test-output/cucumber-reports.html",
+            "json:test-output/cucumber.json",
+            "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+            "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
     },
     monochrome = true
 //    	    dryRun = false,

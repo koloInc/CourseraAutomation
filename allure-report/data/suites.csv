@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","37611","Submit invalid email and phone number and verify error messages","","Wed Jul 09 18:01:52 IST 2025","passed","Wed Jul 09 18:02:30 IST 2025","","Government form validation","Submit invalid email and phone number and verify error messages",""
