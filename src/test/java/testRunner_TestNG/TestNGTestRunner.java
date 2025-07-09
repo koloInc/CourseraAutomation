@@ -14,6 +14,7 @@ import org.testng.annotations.DataProvider;
          "features/testCase006.feature",
          "features/testCase007.feature",
          "features/testCase008.feature",
+         "features/testCase009.feature",
          "features/testCase010.feature"
     },
     glue = {
