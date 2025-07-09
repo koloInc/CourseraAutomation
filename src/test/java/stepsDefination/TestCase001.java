@@ -21,20 +21,21 @@ public class TestCase001 {
     CoursePage coursePage;
     List<Map<String, String>> courseDetailsList = new ArrayList<>();
     
-    @Given("the user is on the Coursera homepage")
-    public void the_user_is_on_the_coursera_homepage() {
-        homePage = new HomePage(driver);
-    }
+//    @Given("the user is on the Coursera homepage")
+//    public void the_user_is_on_the_coursera_homepage() {
+//        homePage = new HomePage(driver);
+//    }
 
     @When("the user searches for {string}")
     public void the_user_searches_for(String courseName) {
-        homePage.setSearchBar(courseName);
-        homePage.submitSearch();
+        CommonSteps.homePage.setSearchBar(courseName);
+        CommonSteps.homePage.submitSearch();
     }
 
     @When("filters the results by language {string}")
     public void filters_the_results_by_language(String language) {
-        coursePage = new CoursePage(driver);
+        driver=BaseClass.getDriver();
+    		coursePage = new CoursePage(driver);
         coursePage.clickallLang();
         coursePage.getLanguages();
         coursePage.selectLang(language);
@@ -76,7 +77,7 @@ public class TestCase001 {
     			Assert.assertTrue("Rating should not be empty", course.get("rating") != null && !course.get("rating").isEmpty());
     			Assert.assertTrue("Duration should not be empty", course.get("duration") != null && !course.get("duration").isEmpty());
 
-    			System.out.println("✅ Validated course: " + course);
+    			System.out.println("Validated course: " + course);
     		}
 
     }
