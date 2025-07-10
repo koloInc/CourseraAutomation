@@ -19,3 +19,4 @@ buildNumber.properties
 src/test/resources/CourseraAutomationData.xlsx
 
 logs/
+node_modules/
