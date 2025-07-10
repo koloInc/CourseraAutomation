@@ -24,36 +24,39 @@ public class TestCase007 {
     		driver = BaseClass.getDriver();
         coursePage = new CourseContent(driver);
         coursePage.getTitle();
-//        String i=xl.getCellData("CourseDetailedInfo",1,0); 
-//        System.out.println(i);
-        coursePage.getCourseIndex(1);
+        int i=Integer.parseInt(xl.getCellData("CourseDetailedInfo",1,0)); 
+        coursePage.getCourseIndex(i);
         coursePage.getAllWindows();
         coursePage.switchToCoursePage();
     }
 
     @Then("the course page should display the course title")
     public void the_course_page_should_display_the_course_title() throws IOException {
-        System.out.println("Course Title: " + coursePage.getCourseTitle());
-        xl.setCellData("CourseDetailedInfo", 1, "Title",coursePage.getCourseTitle());
+        String title=coursePage.getCourseTitle();
+    		System.out.println("Course Title: " + title);
+        xl.setCellData("CourseDetailedInfo", 1, "Title",title);
     }
 
     @Then("the total number of modules")
     public void the_total_number_of_modules() throws IOException {
-        System.out.println("Modules: " + coursePage.getTotalModules());
-        xl.setCellData("CourseDetailedInfo", 1, "Total Module",coursePage.getTotalModules());
+    		String totalModule=coursePage.getTotalModules();
+        System.out.println("Modules: " + totalModule);
+        xl.setCellData("CourseDetailedInfo", 1, "Total Module",totalModule);
     }
 
     @Then("the course rating")
     public void the_course_rating() throws IOException {
-        System.out.println("Rating: " + coursePage.getRating());
-        xl.setCellData("CourseDetailedInfo", 1, "Rating", coursePage.getRating());
+    		String rating=coursePage.getRating();
+        System.out.println("Rating: " + rating);
+        xl.setCellData("CourseDetailedInfo", 1, "Rating", rating);
         
     }
 
     @Then("the total number of reviews")
     public void the_total_number_of_reviews() throws IOException {
-        System.out.println("Reviews: " + coursePage.getTotalReviews());
-        xl.setCellData("CourseDetailedInfo", 1, "Total Reviews", coursePage.getTotalReviews());
+    		String review=coursePage.getTotalReviews();
+        System.out.println("Reviews: " + review);
+        xl.setCellData("CourseDetailedInfo", 1, "Total Reviews", review);
     }
 
     @Then("the user clicks on {string}")
