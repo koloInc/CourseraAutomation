@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import io.cucumber.java.en.*;
 import pageObjects.CourseContent;
 import pageObjects.HomePage;
+import utilities.Constants;
 import utilities.ExcelUtils;
 import factory.BaseClass;
 
@@ -24,7 +25,7 @@ public class TestCase007 {
     		driver = BaseClass.getDriver();
         coursePage = new CourseContent(driver);
         coursePage.getTitle();
-        int i=Integer.parseInt(xl.getCellData("CourseDetailedInfo",1,0)); 
+        int i=Integer.parseInt(xl.getCellData(Constants.SHEET_CourseDetailedInfo,Constants.ROW_DATA,Constants.COL_COURSE_POS)); 
         coursePage.getCourseIndex(i);
         coursePage.getAllWindows();
         coursePage.switchToCoursePage();
@@ -34,29 +35,28 @@ public class TestCase007 {
     public void the_course_page_should_display_the_course_title() throws IOException {
         String title=coursePage.getCourseTitle();
     		System.out.println("Course Title: " + title);
-        xl.setCellData("CourseDetailedInfo", 1, "Title",title);
+        xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_COURSE_TITLE,title);
     }
 
     @Then("the total number of modules")
     public void the_total_number_of_modules() throws IOException {
     		String totalModule=coursePage.getTotalModules();
         System.out.println("Modules: " + totalModule);
-        xl.setCellData("CourseDetailedInfo", 1, "Total Module",totalModule);
+        xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_MODULE,totalModule);
     }
 
     @Then("the course rating")
     public void the_course_rating() throws IOException {
     		String rating=coursePage.getRating();
         System.out.println("Rating: " + rating);
-        xl.setCellData("CourseDetailedInfo", 1, "Rating", rating);
-        
+        xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_COURSE_RATING,rating);
     }
 
     @Then("the total number of reviews")
     public void the_total_number_of_reviews() throws IOException {
     		String review=coursePage.getTotalReviews();
         System.out.println("Reviews: " + review);
-        xl.setCellData("CourseDetailedInfo", 1, "Total Reviews", review);
+        xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_REVIEW,review);
     }
 
     @Then("the user clicks on {string}")
@@ -67,16 +67,16 @@ public class TestCase007 {
     @Then("the skills and learning outcomes should be displayed")
     public void the_skills_and_learning_outcomes_should_be_displayed() throws IOException {
     		List <WebElement> skills=coursePage.setAllSkills();
-    		int index=1;
+    		int index=Constants.ROW_DATA;
         for(WebElement skill:skills) {
-        		xl.setCellData("CourseDetailedInfo", index, "Skills",skill.getText());
+        		xl.setCellData(Constants.SHEET_CourseDetailedInfo, index, Constants.COL_SKILLS,skill.getText());
 			System.out.println(skill.getText());
 			index+=1;
 		}
-        index=1;
+        index=Constants.ROW_DATA;
         List <WebElement>weLearn=coursePage.setAllWeLearn();
 		for(WebElement learn:weLearn) {
-			xl.setCellData("CourseDetailedInfo", index, "We Learn",learn.getText());
+			xl.setCellData(Constants.SHEET_CourseDetailedInfo, index, Constants.COL_WELEARN,learn.getText());
 			System.out.println(learn.getText());
 			index+=1;
 		}

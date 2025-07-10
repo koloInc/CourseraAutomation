@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.HomePage;
+import utilities.Constants;
 import utilities.ExcelUtils;
 
 public class TestCase009 {
@@ -21,12 +22,12 @@ public class TestCase009 {
 	// Store footer data
     ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
     Map<String, Map<String, String>> footerData = new HashMap<>();
-	
+    int index;
     @When("the user retrieves all footer sections")
 	public void the_user_retrieves_all_footer_sections() throws IOException {
 		List<WebElement> footers = CommonSteps.homePage.getAllFooter();
 
-		int index=1;
+		index=Constants.ROW_DATA;
 		for (WebElement footer : footers) {
 			String title = CommonSteps.homePage.getFooterTitle(footer);
 			List<WebElement> units = CommonSteps.homePage.getContentList(footer);
@@ -55,16 +56,16 @@ public class TestCase009 {
 			Map<String, String> linksMap = entry.getValue();
 
 			System.out.println("Section: " + title);
-			xl.setCellData("FooterValidation", index, "Section", title);
-			xl.fillGreenColor("FooterValidation", index, 0);
+			xl.setCellData(Constants.SHEET_FooterValidation, index, Constants.COL_SECTIONS, title);
+			xl.fillGreenColor(Constants.SHEET_FooterValidation, index, 0);
 
 			for (Map.Entry<String, String> linkEntry : linksMap.entrySet()) {
 				String text = linkEntry.getKey();
 				String href = linkEntry.getValue();
 
 				System.out.println(text + " -> " + href);
-				xl.setCellData("FooterValidation", index, "Title", text);
-				xl.setCellData("FooterValidation", index, "Link", href);
+				xl.setCellData(Constants.SHEET_FooterValidation, index, Constants.COL_FOOTER_TITLE, text);
+				xl.setCellData(Constants.SHEET_FooterValidation, index, Constants.COL_FOOTER_LINK, href);
 				if (href.isEmpty()) {
 					throw new AssertionError("No Link Found");
 				} else {

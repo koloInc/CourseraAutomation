@@ -14,8 +14,8 @@ public class Constants {
     public static final String SHEET_AppStorePlayStore = "AppStore&PlayStore";
     
     
-    // Handling CourseDetails
-    public static final int ROW_DATA= 1;
+    // Handling CourseDetails 1
+    public static final int ROW_DATA= 1;   //for initial where data is starting we are using for getting first row for reading and writing
     public static final int COL_SEARCH= 0;
     public static final int COL_LANGUAGE = 1;
     public static final int COL_LEVEL = 2;
@@ -24,13 +24,35 @@ public class Constants {
     public static final String COL_RATING= "Rating";
     public static final String COL_DURATION= "Duration";
  
+    //For List of Languauge 2
+    public static final String COL_LANG_LIST= "Language";
+    public static final String COL_NUM_COURSE= "No of Course";
+
+    // For course detailed info 7
+    public static final int COL_COURSE_POS= 0;
+    public static final String COL_COURSE_TITLE= "Title";
+    public static final String COL_MODULE= "Total Module";
+    public static final String COL_COURSE_RATING= "Rating";
+    public static final String COL_REVIEW="Total Reviews";
+    public static final String COL_SKILLS="Skills";
+    public static final String COL_WELEARN="We Learn";
+    
+    //For Footer Info 9
+    public static final String COL_SECTIONS= "Section";
+    public static final String COL_FOOTER_TITLE="Title";
+    public static final String COL_FOOTER_LINK="Link";
     
 
-    // Row Indexes for Specific Validations
+    // Row Indexes for Specific Validations 
     public static final int ROW_CREATE_ACCOUNT = 1;
     public static final int ROW_CHILD_WINDOW = 2;
     public static final int ROW_CHILD_TITLE = 3;
- 
+
+   
+    
+    
+    
+    
     // Excel File Path
     public static final String EXCEL_FILE = "MiniProject(Rediff)_TestData.xlsx";
 }
