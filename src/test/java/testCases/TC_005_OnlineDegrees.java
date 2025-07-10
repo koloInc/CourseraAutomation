@@ -31,7 +31,7 @@ public class TC_005_OnlineDegrees extends BaseClass {
         System.out.println("Total Results: " + od.getTotalResults());
 
         // Print details of each college card listed
-        System.out.println("College Degree Cards:");
+        //System.out.println("College Degree Cards:");
         for (String cardDetail : od.getCollegeDetails()) {
             System.out.println(cardDetail);
             System.out.println();

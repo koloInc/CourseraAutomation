@@ -1,7 +1,6 @@
 package pageObjects;
 
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,24 +11,34 @@ public class PartnersPage extends BasePage {
         super(driver);
     }
 
-    //  Country Selector
-    @FindBy(xpath = "//a[normalize-space()='India']")
-    WebElement country;
+    // Country Selector
+    @FindBy(xpath = "//div[@data-e2e='country-tags']")
+    private WebElement countryTagsContainer;
 
-    //  Partner Cards
+    @FindBy(xpath = "//div[@data-e2e='country-tags']//a")
+    private List<WebElement> countryList;
+
+    // Partner Cards
     @FindBy(xpath = "//*[@class='horizontal-box wrap css-jqim4p']//a")
-    List<WebElement> availableLinks;
+    private List<WebElement> availableLinks;
 
     @FindBy(xpath = "//*[@class='horizontal-box wrap css-jqim4p']//a//img")
-    List<WebElement> availableLogos;
+    private List<WebElement> availableLogos;
 
     @FindBy(xpath = "//*[@class='horizontal-box wrap css-jqim4p']//a//p")
-    List<WebElement> availableNames;
+    private List<WebElement> availableNames;
 
     // Actions
-    public void openIndiaPartners() {
-        scrollIntoView(country);
-        country.click();
+
+    /** Scrolls to country selector and selects the specified country */
+    public void openPartnersByCountry(String countryName) {
+        scrollIntoView(countryTagsContainer);
+        for (WebElement country : countryList) {
+            if (country.getText().trim().equalsIgnoreCase(countryName)) {
+                country.click();
+                break;
+            }
+        }
     }
 
     public List<WebElement> getAllPartnerLinks() {

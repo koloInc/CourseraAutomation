@@ -60,9 +60,9 @@ public class ForBusiness extends BasePage {
         noOfUsers.sendKeys(String.valueOf(value));
     }
 
-    public void selectQuarterlyPayment() {
+    public void selectQuarterlyPayment(String time) {
         for (WebElement option : paymentOptions) {
-            if (option.getText().contains("Quarterly")) {
+            if (option.getText().contains(time)){
                 option.click();
                 break;
             }

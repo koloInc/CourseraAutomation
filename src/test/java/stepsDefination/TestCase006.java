@@ -35,8 +35,8 @@ public class TestCase006 {
     }
 
     @When("selects the quarterly payment option")
-    public void selects_the_quarterly_payment_option() {
-        forBusiness.selectQuarterlyPayment();
+    public void selects_the_quarterly_payment_option(String time1) {
+        forBusiness.selectQuarterlyPayment(time1);
     }
 
     @Then("the application should display the purchase summary")
