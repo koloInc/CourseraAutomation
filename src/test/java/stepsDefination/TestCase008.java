@@ -16,7 +16,7 @@ public class TestCase008 {
 	WebDriver driver;
 	ForGovernment forGovernment;
 	XMLUtils xml = new XMLUtils("country.xml");
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+	ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
 	@Then("the user navigates to the For Government section")
 	public void the_user_navigates_to_the_for_government_section() {

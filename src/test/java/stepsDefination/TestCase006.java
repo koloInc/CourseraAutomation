@@ -13,7 +13,7 @@ public class TestCase006 {
 
     WebDriver driver;
     ForBusiness forBusiness;
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+    ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
     @Then("the user navigates to the For Business section")
     public void the_user_navigates_to_the_for_business_section() {

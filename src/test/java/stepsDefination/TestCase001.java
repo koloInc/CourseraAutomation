@@ -31,20 +31,20 @@ public class TestCase001 {
         CommonSteps.homePage.submitSearch();
     }
 
-    @When("filters the results by language {string}")
-    public void filters_the_results_by_language(String language) {
-    		String lang=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_LANGUAGE);  //here
+    @When("filters the results by language")
+    public void filters_the_results_by_language() {
+    		String language=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_LANGUAGE);  //here
         driver=BaseClass.getDriver();
     		coursePage = new CoursePage(driver);
         coursePage.clickallLang();
         coursePage.getLanguages();
-        coursePage.selectLang(lang);
+        coursePage.selectLang(language);
     }
 
-    @When("filters the results by level {string}")
-    public void filters_the_results_by_level(String level) {
-    		String lvl=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_LEVEL);  //here
-        coursePage.setLevel(lvl);
+    @When("filters the results by level")
+    public void filters_the_results_by_level() {
+    		String level=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_LEVEL);  //here
+        coursePage.setLevel(level);
     }
 
 

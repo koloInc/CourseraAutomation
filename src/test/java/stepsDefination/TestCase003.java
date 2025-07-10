@@ -17,15 +17,8 @@ public class TestCase003 {
     ForGovernment forGovernment;
     ForBusiness forBusiness;
     XMLUtils xml = new XMLUtils("country.xml");
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+    ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
     
-
-
-    /*@Then("the user navigates to the For Business section")
-    public void the_user_navigates_to_the_for_business_section() {
-        CommonSteps.homePage.clickForBusiness();
-    }*/
-
     @When("the user fills out the government request form with invalid email and phone number")
     public void the_user_fills_out_the_government_request_form_with_invalid_email_and_phone_number() {
         driver = BaseClass.getDriver();
@@ -51,18 +44,16 @@ public class TestCase003 {
     @Then("the application should display appropriate error messages for email and phone number")
     public void the_application_should_display_appropriate_error_messages_for_email_and_phone_number() {
         forBusiness = new ForBusiness(driver);
-        int row_no =1;
         //System.out.println("Email Error Message: " + forBusiness.getEmailError());
         try {
-			xl.setCellData(Constants.SHEET_ErrorMessage, row_no, "Email Error Message", forBusiness.getEmailError());
+			xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_EMAIL_ERR, forBusiness.getEmailError());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         BaseClass.pressTabKey();
         //System.out.println("Phone Error Message: " + forBusiness.getPoneError());
         try {
-			xl.setCellData(Constants.SHEET_ErrorMessage, row_no, "Phone Error Message", forBusiness.getPoneError());
+			xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_PHONE_ERR, forBusiness.getPoneError());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

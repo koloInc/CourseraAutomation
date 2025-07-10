@@ -15,7 +15,7 @@ public class TestCase005 {
 
     WebDriver driver;
     OnlineDegrees onlineDegrees;
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+    ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
     @When("the user navigates to the Online Degrees section")
     public void the_user_navigates_to_the_online_degrees_section() {
@@ -44,7 +44,7 @@ public class TestCase005 {
 
         List<String> cardDetails = onlineDegrees.getCollegeDetails();
 
-        int startingRow = 1; // Row 0 can be used for headers if needed
+        int startingRow = Constants.ROW_DATA; // Row 0 can be used for headers if needed
 
         for (int i = 0; i < cardDetails.size(); i++) {
             String detail = cardDetails.get(i);
@@ -54,7 +54,7 @@ public class TestCase005 {
             // System.out.println();
 
             try {
-                xl.setCellData(Constants.SHEET_OnlineDegree, startingRow + i, "Card Details", detail);
+                xl.setCellData(Constants.SHEET_OnlineDegree, startingRow + i, Constants.COL_CARD_DETAILS, detail);
             } catch (IOException e) {
                 e.printStackTrace();
             }

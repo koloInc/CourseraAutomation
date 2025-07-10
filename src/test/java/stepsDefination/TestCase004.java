@@ -17,7 +17,7 @@ public class TestCase004 {
     WebDriver driver;
     PartnersPage partnersPage;
     XMLUtils xml = new XMLUtils("country.xml");
-    ExcelUtils xl = new ExcelUtils("CourseraAutomationData.xlsx");
+    ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
     @Then("the user navigates to the Partners section")
     public void the_user_navigates_to_the_partners_section() {
@@ -39,7 +39,7 @@ public class TestCase004 {
 
         int total = Math.min(Math.min(links.size(), logos.size()), names.size());
 
-        int startingRow = 1;
+        int startingRow = Constants.ROW_DATA;
 
         // Uncomment if you want Excel headers automatically in row 0
        /* try {
@@ -59,15 +59,14 @@ public class TestCase004 {
             // System.out.println(String.format("%-80s\t%-15s\t%-40s", url, visible, label));
 
             try {
-                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, "Partner Link", url);
-                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, "Logo Displayed", visible);
-                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, "Partner Name", label);
+                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, Constants.COL_PARTNER_LINK, url);
+                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, Constants.COL_LOGO_DISP, visible);
+                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, Constants.COL_PARTNER_NAME, label);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        // Optional: Close file if you're done
         xl.closeFile();
     }
 }

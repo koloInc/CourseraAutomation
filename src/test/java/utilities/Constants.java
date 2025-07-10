@@ -28,6 +28,18 @@ public class Constants {
     public static final String COL_LANG_LIST= "Language";
     public static final String COL_NUM_COURSE= "No of Course";
 
+    //For Business 3
+    public static final String COL_EMAIL_ERR= "Email Error Message";
+    public static final String COL_PHONE_ERR="Phone Error Message";
+    
+    //For partners flow 4
+    public static final String COL_PARTNER_LINK="Partner Link";
+    public static final String COL_LOGO_DISP="Logo Displayed";
+    public static final String COL_PARTNER_NAME="Partner Name";
+    
+    //For Card Details 5
+    public static final String COL_CARD_DETAILS="Card Details";
+    
     // For course detailed info 7
     public static final int COL_COURSE_POS= 0;
     public static final String COL_COURSE_TITLE= "Title";
@@ -36,13 +48,17 @@ public class Constants {
     public static final String COL_REVIEW="Total Reviews";
     public static final String COL_SKILLS="Skills";
     public static final String COL_WELEARN="We Learn";
+   
     
     //For Footer Info 9
     public static final String COL_SECTIONS= "Section";
     public static final String COL_FOOTER_TITLE="Title";
     public static final String COL_FOOTER_LINK="Link";
     
-
+   
+    //FOr Govt 8
+    public static final String COL_CONF_MSG="Confirmation Message";
+    
     // Row Indexes for Specific Validations 
     public static final int ROW_CREATE_ACCOUNT = 1;
     public static final int ROW_CHILD_WINDOW = 2;
