@@ -15,6 +15,7 @@ import io.cucumber.java.en.*;
 import pageObjects.CoursePage;
 import pageObjects.HomePage;
 import utilities.ExcelUtils;
+import utilities.Constants;
 public class TestCase001 {
 
     WebDriver driver = BaseClass.getDriver();
@@ -23,16 +24,16 @@ public class TestCase001 {
     List<Map<String, String>> courseDetailsList = new ArrayList<>();
     ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
 
-    @When("the user searches for {string}")
-    public void the_user_searches_for(String courseName) {
-    		String course=xl.getCellData("CourseDetails",1,0);  //here
-        CommonSteps.homePage.setSearchBar(course);
+    @When("the user searches for course")
+    public void the_user_searches_for() {
+    		String courseName=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_SEARCH);
+        CommonSteps.homePage.setSearchBar(courseName);
         CommonSteps.homePage.submitSearch();
     }
 
     @When("filters the results by language {string}")
     public void filters_the_results_by_language(String language) {
-    		String lang=xl.getCellData("CourseDetails",1,1);  //here
+    		String lang=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_LANGUAGE);  //here
         driver=BaseClass.getDriver();
     		coursePage = new CoursePage(driver);
         coursePage.clickallLang();
@@ -42,14 +43,15 @@ public class TestCase001 {
 
     @When("filters the results by level {string}")
     public void filters_the_results_by_level(String level) {
-    		String lvl=xl.getCellData("CourseDetails",1,1);  //here
+    		String lvl=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_LEVEL);  //here
         coursePage.setLevel(lvl);
     }
 
 
 	@When("selects the first {int} courses from the results")
 	public void selects_the_first_n_courses_from_the_results(int count) {
-		for (int i = 0; i < count; i++) {
+		int totalCourse=Integer.parseInt(xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_COURSE_NUMBER));
+		for (int i = 0; i < totalCourse; i++) {
 			WebElement card = coursePage.getCard(i);
 			String title = coursePage.getTitle(card);
 			String rating = coursePage.getRating(card);
@@ -69,7 +71,7 @@ public class TestCase001 {
     @Then("the course titles, ratings, and durations should be displayed")
     public void the_course_titles_ratings_and_durations_should_be_displayed() throws IOException {
 
-    		int index=1;
+    		int index=Constants.ROW_DATA;
     		Assert.assertFalse("Course details should not be empty", courseDetailsList.isEmpty());
     		
     		for (Map<String, String> course : courseDetailsList) {
@@ -77,9 +79,9 @@ public class TestCase001 {
     			Assert.assertTrue("Rating should not be empty", course.get("rating") != null && !course.get("rating").isEmpty());
     			Assert.assertTrue("Duration should not be empty", course.get("duration") != null && !course.get("duration").isEmpty());
     			
-    			xl.setCellData("CourseDetails", index, "Title", course.get("title"));
-    			xl.setCellData("CourseDetails", index, "Rating", course.get("rating"));
-    			xl.setCellData("CourseDetails", index, "Duration", course.get("duration"));
+    			xl.setCellData(Constants.SHEET_CourseDetails, index, Constants.COL_TITLE, course.get("title"));
+    			xl.setCellData(Constants.SHEET_CourseDetails, index, Constants.COL_RATING, course.get("rating"));
+    			xl.setCellData(Constants.SHEET_CourseDetails, index, Constants.COL_DURATION, course.get("duration"));
     			index+=1;
     			System.out.println("Validated course: " + course);
     		}

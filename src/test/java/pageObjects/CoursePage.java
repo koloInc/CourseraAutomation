@@ -93,7 +93,12 @@ public class CoursePage extends BasePage{
 	
 	//get rating of specific course
 	public String getRating(WebElement card) {
-		return card.findElement(By.xpath(".//*[@class='css-6ecy9b']")).getText();
+		try {
+			return card.findElement(By.xpath(".//*[@class='css-6ecy9b']")).getText();
+		}
+		catch(Exception e) {
+			return "Rating Not Available";
+		}
 	}
 	
 	//get duration of specific course

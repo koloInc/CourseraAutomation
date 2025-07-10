@@ -2,7 +2,7 @@ Feature: View Course Content
 
   Scenario: User searches for a course and views its content
     Given the user is on the homepage
- 	 	When the user searches for "Web Development"
+ 	 	When the user searches for course
     And selects the first course from the results
     Then the course page should display the course title
     And the total number of modules

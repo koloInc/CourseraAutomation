@@ -1,7 +1,6 @@
 package stepsDefination;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.HomePage;
@@ -21,14 +19,13 @@ public class TestCase009 {
 	HomePage homePage;
 	
 	// Store footer data
-//	Map<String, List<String>> footerData = new HashMap<>();
     ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
     Map<String, Map<String, String>> footerData = new HashMap<>();
 	
     @When("the user retrieves all footer sections")
 	public void the_user_retrieves_all_footer_sections() throws IOException {
 		List<WebElement> footers = CommonSteps.homePage.getAllFooter();
-//		Map<String, Map<String, String>> footerData = new HashMap<>();
+
 		int index=1;
 		for (WebElement footer : footers) {
 			String title = CommonSteps.homePage.getFooterTitle(footer);
