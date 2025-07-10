@@ -20,7 +20,7 @@ public class TestCase009 {
 	HomePage homePage;
 	
 	// Store footer data
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+	ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
     Map<String, Map<String, String>> footerData = new HashMap<>();
     int index;
     @When("the user retrieves all footer sections")

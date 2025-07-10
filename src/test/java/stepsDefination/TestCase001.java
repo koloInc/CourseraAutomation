@@ -22,7 +22,7 @@ public class TestCase001 {
     HomePage homePage;
     CoursePage coursePage;
     List<Map<String, String>> courseDetailsList = new ArrayList<>();
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+    ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
     @When("the user searches for course")
     public void the_user_searches_for() {

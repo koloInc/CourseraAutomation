@@ -18,7 +18,7 @@ public class TestCase007 {
     HomePage hp;
     CourseContent coursePage;
     WebDriver driver;
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+    ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
     @When("selects the first course from the results")
     public void selects_the_first_course_from_the_results() {

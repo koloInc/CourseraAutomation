@@ -49,10 +49,6 @@ public class Constants {
     public static final int ROW_CHILD_TITLE = 3;
 
    
-    
-    
-    
-    
     // Excel File Path
-    public static final String EXCEL_FILE = "MiniProject(Rediff)_TestData.xlsx";
+    public static final String EXCEL_FILE = "CourseraAutomationData.xlsx";
 }

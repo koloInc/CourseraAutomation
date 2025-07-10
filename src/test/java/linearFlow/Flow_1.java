@@ -19,7 +19,9 @@ public class Flow_1 {
 		
 		WebElement searchBar=driver.findElement(By.id("search-autocomplete-input"));
 		searchBar.sendKeys("Web Development");
-		searchBar.sendKeys(Keys.ENTER);
+		driver.findElement(By.xpath("//*[@class=\"search-form\"]//*[@type=\"button\"][1]")).click();
+		
+//		searchBar.sendKeys(Keys.ENTER);
 		
 		//For More Languages
 		WebElement allLang=driver.findElement(By.cssSelector("button[aria-label='Show more Language options'] span[class='cds-button-label']"));

@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
 
@@ -18,6 +21,9 @@ public class HomePage extends BasePage {
     //  Navigation Links
     @FindBy(id = "search-autocomplete-input")
     WebElement searchBar;
+    
+    @FindBy(xpath="//*[@id='react-autowhatever-1']")
+    WebElement suggestion;
 
     @FindBy(xpath = "//a[@data-click-key='front_page.front_page_story.click.navigation_meta_nav_Business']")
     WebElement forBusiness;
@@ -57,6 +63,8 @@ public class HomePage extends BasePage {
     }
 
     public void submitSearch() {
+    		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    		wait.until(ExpectedConditions.visibilityOf(suggestion));
         searchBar.sendKeys(Keys.ENTER);
     }
 

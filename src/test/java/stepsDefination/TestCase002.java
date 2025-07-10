@@ -10,7 +10,7 @@ import utilities.Constants;
 import utilities.ExcelUtils;
 
 public class TestCase002 {
-    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
+	ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
     @Then("the list of available languages should be displayed")
     public void the_list_of_available_languages_should_be_displayed() throws IOException {
     		int index=Constants.ROW_DATA;
