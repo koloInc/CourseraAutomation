@@ -39,7 +39,7 @@ public class BaseClass {
 		return generatedString;
 	}
 	
-	public String randomNumber()
+	public String randomMobileNumber()
 	{
 		String generatedString=RandomStringUtils.randomNumeric(10);
 		return generatedString;

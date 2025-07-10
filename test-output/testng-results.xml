@@ -2,68 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-<<<<<<< Updated upstream
-  <suite started-at="2025-07-09T11:15:36 IST" name="Default suite" finished-at="2025-07-09T11:15:53 IST" duration-ms="17132">
-=======
-  <suite started-at="2025-07-08T18:04:39 IST" name="Default suite" finished-at="2025-07-08T18:05:15 IST" duration-ms="35942">
->>>>>>> Stashed changes
+  <suite started-at="2025-07-10T14:29:58 IST" name="Default suite" finished-at="2025-07-10T14:30:42 IST" duration-ms="43366">
     <groups>
-      <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner_TestNG.TestNGTestRunner@37883b97]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
-      </group> <!-- cucumber -->
     </groups>
-<<<<<<< Updated upstream
-    <test started-at="2025-07-09T11:15:36 IST" name="Default test" finished-at="2025-07-09T11:15:53 IST" duration-ms="17132">
-      <class name="testCases.TC_009_Footer">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testCases.TC_009_Footer@587e5365]" started-at="2025-07-09T11:15:36 IST" name="setup" finished-at="2025-07-09T11:15:49 IST" duration-ms="12203" status="PASS">
+    <test started-at="2025-07-10T14:29:58 IST" name="Default test" finished-at="2025-07-10T14:30:42 IST" duration-ms="43366">
+      <class name="testCases.TC_003_PrintErrorMsz">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testCases.TC_003_PrintErrorMsz@1a3e5f23]" started-at="2025-07-10T14:29:58 IST" name="setup" finished-at="2025-07-10T14:30:10 IST" duration-ms="11922" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="footerData()[pri:0, instance:testCases.TC_009_Footer@587e5365]" started-at="2025-07-09T11:15:49 IST" name="footerData" finished-at="2025-07-09T11:15:51 IST" duration-ms="1917" status="PASS">
+        <test-method signature="email_phone_error()[pri:0, instance:testCases.TC_003_PrintErrorMsz@1a3e5f23]" started-at="2025-07-10T14:30:10 IST" name="email_phone_error" finished-at="2025-07-10T14:30:38 IST" duration-ms="27671" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- footerData -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_009_Footer@587e5365]" started-at="2025-07-09T11:15:51 IST" name="tearDown" finished-at="2025-07-09T11:15:53 IST" duration-ms="2950" status="PASS">
+        </test-method> <!-- email_phone_error -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_003_PrintErrorMsz@1a3e5f23]" started-at="2025-07-10T14:30:38 IST" name="tearDown" finished-at="2025-07-10T14:30:42 IST" duration-ms="3379" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- testCases.TC_009_Footer -->
-=======
-    <test started-at="2025-07-08T18:04:39 IST" name="Default test" finished-at="2025-07-08T18:05:15 IST" duration-ms="35942">
-      <class name="testRunner_TestNG.TestNGTestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:testRunner_TestNG.TestNGTestRunner@37883b97]" started-at="2025-07-08T18:04:39 IST" name="setUpClass" finished-at="2025-07-08T18:04:40 IST" duration-ms="968" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[org.testng.TestRunner@4bb147ec]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:testRunner_TestNG.TestNGTestRunner@37883b97]" started-at="2025-07-08T18:04:40 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-07-08T18:05:14 IST" duration-ms="34548" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Submit invalid email and phone number and verify error messages"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Government form validation"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:testRunner_TestNG.TestNGTestRunner@37883b97]" started-at="2025-07-08T18:05:14 IST" name="tearDownClass" finished-at="2025-07-08T18:05:15 IST" duration-ms="352" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDownClass -->
-      </class> <!-- testRunner_TestNG.TestNGTestRunner -->
->>>>>>> Stashed changes
+      </class> <!-- testCases.TC_003_PrintErrorMsz -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -127,7 +127,7 @@ public class BaseClass {
     }
 
     // Generate random numeric string
-    public static String randomeNumber() {
+    public static String randomMobileNumber() {
         return RandomStringUtils.randomNumeric(10);
     }
 

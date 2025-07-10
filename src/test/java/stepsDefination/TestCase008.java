@@ -28,13 +28,13 @@ public class TestCase008 {
 		forGovernment.setFirstName(BaseClass.randomeString());
 		forGovernment.setLastName(BaseClass.randomeString());
 		forGovernment.setEmail(BaseClass.randomEmail());
-		forGovernment.setMobileNo(BaseClass.randomeNumber());
+		forGovernment.setMobileNo(BaseClass.randomMobileNumber());
 		forGovernment.selectOrgType(BaseClass.randomNumberInRange(1, 2));
 		forGovernment.setJobTitle(BaseClass.randomeString() + BaseClass.randomeString());
 		forGovernment.setOrgName(BaseClass.randomeString());
 		forGovernment.selectOrgSize(BaseClass.randomNumberInRange(1, 5));
-		forGovernment.selectAboutYou(BaseClass.randomNumberInRange(1, 5));
-		forGovernment.selectCountry("Israel");
+		forGovernment.selectAboutYou(BaseClass.randomNumberInRange(1, 4));
+		forGovernment.selectCountry("Israel"); // need to change to soft code
 	}
 
 	@When("submits the government request form")

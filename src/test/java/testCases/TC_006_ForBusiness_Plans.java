@@ -12,6 +12,7 @@ public class TC_006_ForBusiness_Plans extends BaseClass {
 	@Test
 	public void planDetails()
 	{
+		String time1 = "Annual";
 		HomePage hp = new HomePage(driver);
 		hp.clickForBusiness();
 		
@@ -20,7 +21,7 @@ public class TC_006_ForBusiness_Plans extends BaseClass {
 		business.clickForTeams();
 		business.clickGetStarted(); // You can call this without passing js!
 		business.enterNumberOfUsers(randomNumberInRange(6,300)); //Hard Coded
-		business.selectQuarterlyPayment();
+		business.selectQuarterlyPayment(time1);
 
 		//Thread.sleep(5000); // consider using WebDriverWait instead
 		WaitUtils.waitForDuration(driver, 2);

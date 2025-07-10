@@ -1,29 +1,34 @@
 package stepsDefination;
 
+import java.io.IOException;
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.PartnersPage;
+import utilities.Constants;
+import utilities.ExcelUtils;
+import utilities.XMLUtils;
 
 public class TestCase004 {
 
     WebDriver driver;
     PartnersPage partnersPage;
+    XMLUtils xml = new XMLUtils("country.xml");
+    ExcelUtils xl = new ExcelUtils("CourseraAutomationData.xlsx");
 
     @Then("the user navigates to the Partners section")
     public void the_user_navigates_to_the_partners_section() {
         CommonSteps.homePage.clickPartners();
     }
 
-    @And("opens the India Partners list")
-    public void opens_the_india_partners_list() {
+    @And("opens the country Partners list")
+    public void opens_the_country_partners_list() {
         driver = BaseClass.getDriver();
         partnersPage = new PartnersPage(driver);
-        partnersPage.openIndiaPartners();
+        partnersPage.openPartnersByCountry(xml.getElementValue("country"));
     }
 
     @Then("the application should display all partner links, logo visibility, and names")
@@ -34,15 +39,35 @@ public class TestCase004 {
 
         int total = Math.min(Math.min(links.size(), logos.size()), names.size());
 
-        System.out.println(String.format("%-80s\t%-15s\t%-40s", "Partner Link", "Logo Displayed", "Partner Name"));
-        System.out.println("=".repeat(140));
+        int startingRow = 1;
+
+        // Uncomment if you want Excel headers automatically in row 0
+       /* try {
+            xl.setCellData(Constants.SHEET_PartnerInfo, 0, "Partner Link", "Partner Link");
+            xl.setCellData(Constants.SHEET_PartnerInfo, 0, "Logo Displayed", "Logo Displayed");
+            xl.setCellData(Constants.SHEET_PartnerInfo, 0, "Partner Name", "Partner Name");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
         for (int i = 0; i < total; i++) {
             String url = links.get(i).getAttribute("href");
             String visible = String.valueOf(logos.get(i).isDisplayed());
-            String label = names.get(i).getText();
+            String label = names.get(i).getText().trim();
 
-            System.out.println(String.format("%-80s\t%-15s\t%-40s", url, visible, label));
+            // Commented out console output
+            // System.out.println(String.format("%-80s\t%-15s\t%-40s", url, visible, label));
+
+            try {
+                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, "Partner Link", url);
+                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, "Logo Displayed", visible);
+                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, "Partner Name", label);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        // Optional: Close file if you're done
+        xl.closeFile();
     }
 }
