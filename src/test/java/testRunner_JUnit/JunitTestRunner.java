@@ -1,8 +1,10 @@
 package testRunner_JUnit;
 
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import utilities.ReportGenerator;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -30,4 +32,8 @@ import io.cucumber.junit.CucumberOptions;
 //  publish = true
 )
 public class JunitTestRunner {
+	@AfterClass
+    public static void generateReport() {
+        ReportGenerator.runAllureBatchFile();
+    }
 }
