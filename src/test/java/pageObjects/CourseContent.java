@@ -108,15 +108,11 @@ public class CourseContent extends BasePage{
 		} 
 	}
 	
-	public void setAllSkills() {
-		for(WebElement skill:skills) {
-			System.out.println(skill.getText());
-		}
+	public List <WebElement> setAllSkills() {
+		return skills;
 	}
 	
-	public void setAllWeLearn() {
-		for(WebElement learn:weLearn) {
-			System.out.println(learn.getText());
-		}
+	public List <WebElement> setAllWeLearn() {
+		return weLearn;
 	}
 }

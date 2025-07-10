@@ -15,7 +15,7 @@ public class ExcelUtils {
 
     public ExcelUtils(String excelName) {
         this.fileName = excelName;
-        this.filePath = System.getProperty("user.dir") + "\\src\\test\\java\\com\\selenium\\test\\data\\" + fileName;
+        this.filePath = System.getProperty("user.dir") + "\\src\\test\\resources\\" + fileName;
         try {
             fis = new FileInputStream(new File(filePath));
             wb = new XSSFWorkbook(fis);
@@ -127,13 +127,15 @@ public class ExcelUtils {
 
     // Test main method
     public static void main(String[] args) throws IOException {
-        ExcelUtils es = new ExcelUtils(System.getProperty("user.dir") + "\\src\\test\\resources\\CourseraAutomationData.xlsx");
-        System.out.println("Row Count: " + es.getRowCount("Testing"));
-        System.out.println("Column Cont: " + es.getColumnCount("SearchData"));
-        System.out.println("Cell Data: " + es.getCellData("SearchData", 0, 1));
+ 
+        ExcelUtils es = new ExcelUtils("CourseraAutomationData.xlsx");
+        System.out.println(System.getProperty("user.dir") + "\\src\\test\\resources\\CourseraAutomationData.xlsx");
+        System.out.println("Row Count: " + es.getRowCount("CourseDetails"));
+        System.out.println("Column Cont: " + es.getColumnCount("CourseDetails"));
+        System.out.println("Cell Data: " + es.getCellData("CourseDetails", 0, 1));
 
-        es.setCellData("Testing", 1, "Actual", "Doee");
-        es.fillRedColor("Testing", 1, 2);
+//        es.setCellData("CourseDetails", 1, "Title", "Doee");
+//        es.fillRedColor("Testing", 1, 2);
         es.closeFile();
     }
 }
