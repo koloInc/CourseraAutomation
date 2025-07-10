@@ -39,7 +39,8 @@ public class TestCase003 {
         forGovernment.setOrgName(BaseClass.randomeString());
         forGovernment.selectOrgSize(BaseClass.randomNumberInRange(1, 5));
         forGovernment.selectAboutYou(BaseClass.randomNumberInRange(1, 5));
-        forGovernment.selectCountry(xml.getElementValue("country"));
+        String country = xml.getElementValue("country") ;
+        forGovernment.selectCountry(country);
     }
 
     @When("submits the request for information")

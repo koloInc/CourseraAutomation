@@ -40,7 +40,7 @@ public class TestCase005 {
 
     @Then("the application should display degree card details")
     public void the_application_should_display_the_total_number_of_results_and_degree_card_details() {
-        System.out.println("Total Results: " + onlineDegrees.getTotalResults());
+        //System.out.println("Total Results: " + onlineDegrees.getTotalResults());
 
         List<String> cardDetails = onlineDegrees.getCollegeDetails();
 
