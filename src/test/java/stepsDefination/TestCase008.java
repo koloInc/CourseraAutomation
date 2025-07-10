@@ -1,15 +1,22 @@
 package stepsDefination;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.ForGovernment;
+import utilities.Constants;
+import utilities.ExcelUtils;
+import utilities.XMLUtils;
 
 public class TestCase008 {
 
 	WebDriver driver;
 	ForGovernment forGovernment;
+	XMLUtils xml = new XMLUtils("country.xml");
+    ExcelUtils xl=new ExcelUtils("CourseraAutomationData.xlsx");
 
 	@Then("the user navigates to the For Government section")
 	public void the_user_navigates_to_the_for_government_section() {
@@ -34,7 +41,8 @@ public class TestCase008 {
 		forGovernment.setOrgName(BaseClass.randomeString());
 		forGovernment.selectOrgSize(BaseClass.randomNumberInRange(1, 5));
 		forGovernment.selectAboutYou(BaseClass.randomNumberInRange(1, 4));
-		forGovernment.selectCountry("Israel"); // need to change to soft code
+		String country = xml.getElementValue("country") ;
+        forGovernment.selectCountry(country);
 	}
 
 	@When("submits the government request form")
@@ -44,6 +52,16 @@ public class TestCase008 {
 
 	@Then("the application should display a confirmation message")
 	public void the_application_should_display_a_confirmation_message() {
-		System.out.println("Confirmation Message: " + forGovernment.getConfirmationMessage());
+	    int row_no = 1;
+
+	    // Get full structured message
+	    String message = forGovernment.getConfirmationMessage();
+
+	 	    try {
+	        xl.setCellData(Constants.SHEET_GovtFileValidation, row_no, "Confirmation Message", message);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 }

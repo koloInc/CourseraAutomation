@@ -38,7 +38,7 @@ public class BasePage {
     //  Take screenshot with filename
     public void captureScreenshot(String fileName) {
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File dest = new File(System.getProperty("user.dir") + "\\Validation_ScreenShot\\" + fileName);
+        File dest = new File(System.getProperty("user.dir") + "\\src\\test\\resources\\Validation_ScreenShot\\" + fileName);
         src.renameTo(dest);
     }
 

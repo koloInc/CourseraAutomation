@@ -7,7 +7,7 @@ public class Constants {
     public static final String SHEET_ErrorMessage = "ErrorMessage";
     public static final String SHEET_PartnerInfo = "PartnerInfo";
     public static final String SHEET_OnlineDegree = "OnlineDegree";
-    public static final String SHEET_BusinessPlan = "CourseLanguage";
+    public static final String SHEET_BusinessPlan = "BusinessPlan";
     public static final String SHEET_CourseDetailedInfo = "CourseDetailedInfo";
     public static final String SHEET_GovtFileValidation = "GovtFileValidation";
     public static final String SHEET_FooterValidation = "FooterValidation";
