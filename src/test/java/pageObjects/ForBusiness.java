@@ -28,6 +28,9 @@ public class ForBusiness extends BasePage {
     @FindBy(xpath = "//div[@class='rc-TeamsPurchaseSummary vertical-box align-items-vertical-center rc-TeamsPurchaseSummary--redesign desktopOnly']")
     WebElement purchaseSummary;
     
+    @FindBy(xpath ="//div[@class='rc-TeamsPurchaseSummary vertical-box align-items-vertical-center rc-TeamsPurchaseSummary--redesign desktopOnly']//span[@class='font-weight-bold']//span[1]")
+    WebElement totalPrice;
+    
     //Invalid Error Email Message
     @FindBy(id="ValidMsgEmail")
     WebElement invalidEmail ;
@@ -67,6 +70,12 @@ public class ForBusiness extends BasePage {
                 break;
             }
         }
+    }
+    public String getTotalPrice() {
+        String result = totalPrice.getText();
+        //System.out.println("Raw text: [" + result + "]");
+
+        return result; 
     }
 
     public String getPurchaseSummary() {

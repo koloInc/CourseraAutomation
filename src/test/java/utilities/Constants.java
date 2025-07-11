@@ -67,4 +67,8 @@ public class Constants {
    
     // Excel File Path
     public static final String EXCEL_FILE = "CourseraAutomationData.xlsx";
+    
+    //XML File Path
+    public static final String XML_FILE = "CourseraAutomation.xml";
+    
 }

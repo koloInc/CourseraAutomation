@@ -16,7 +16,7 @@ public class TestCase004 {
 
     WebDriver driver;
     PartnersPage partnersPage;
-    XMLUtils xml = new XMLUtils("country.xml");
+    XMLUtils xml = new XMLUtils(Constants.XML_FILE);
     ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
     @Then("the user navigates to the Partners section")

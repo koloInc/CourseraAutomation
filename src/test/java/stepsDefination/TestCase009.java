@@ -18,9 +18,10 @@ public class TestCase009 {
 	
 	WebDriver driver;
 	HomePage homePage;
+	ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 	
 	// Store footer data
-	ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
+	
     Map<String, Map<String, String>> footerData = new HashMap<>();
     int index;
     @When("the user retrieves all footer sections")

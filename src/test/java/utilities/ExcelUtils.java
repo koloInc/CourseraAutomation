@@ -41,6 +41,22 @@ public class ExcelUtils {
         DataFormatter formatter = new DataFormatter();
         return formatter.formatCellValue(cell);
     }
+    
+    public int getColumnIndex(String sheetName, String columnName) {
+        sheet = wb.getSheet(sheetName);
+        if (sheet == null) return -1;
+
+        Row headerRow = sheet.getRow(0);
+        if (headerRow == null) return -1;
+
+        for (Cell cell : headerRow) {
+            if (cell.getStringCellValue().trim().equalsIgnoreCase(columnName.trim())) {
+                return cell.getColumnIndex();
+            }
+        }
+        return -1;
+    }
+    
 
     public void setCellData(String sheetName, int rowIndex, String columnName, String data) throws IOException {
         sheet = wb.getSheet(sheetName);

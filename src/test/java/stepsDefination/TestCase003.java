@@ -16,7 +16,7 @@ public class TestCase003 {
     WebDriver driver;
     ForGovernment forGovernment;
     ForBusiness forBusiness;
-    XMLUtils xml = new XMLUtils("country.xml");
+    XMLUtils xml = new XMLUtils(Constants.XML_FILE);
     ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
     
     @When("the user fills out the government request form with invalid email and phone number")

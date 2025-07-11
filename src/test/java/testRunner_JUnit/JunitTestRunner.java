@@ -9,8 +9,8 @@ import utilities.ReportGenerator;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = {
-        "features/testCase010.feature",
-        // "features/testCase004.feature",
+        //"features/testCase006.feature",
+         "features/testCase006.feature",
         // "features/testCase005.feature",
         // "features/testCase006.feature",
         // "features/testCase007.feature",
@@ -26,6 +26,7 @@ import utilities.ReportGenerator;
         "json:test-output/cucumber.json",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
         "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+        
     },
     monochrome = true
 //  dryRun = false,

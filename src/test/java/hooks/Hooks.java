@@ -1,11 +1,17 @@
 package hooks;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 
 import factory.BaseClass;
 import io.cucumber.java.After;
@@ -15,36 +21,61 @@ import io.cucumber.java.Scenario;
 
 public class Hooks {
 
-    WebDriver driver;
-    Properties p;
+	WebDriver driver;
+	Properties p;
+	String sparkFolder;
 
-    @Before
-    public void setup() throws IOException {
-        driver = BaseClass.initilizeBrowser();
-        BaseClass.setDriver(driver);
-        p = BaseClass.getProperties();
-        driver.get(p.getProperty("appURL"));
-        driver.manage().window().maximize();
-    }
+	@Before
+	public void setup() throws IOException {
+		driver = BaseClass.initilizeBrowser();
+		BaseClass.setDriver(driver);
+		p = BaseClass.getProperties();
+		driver.get(p.getProperty("appURL"));
+		driver.manage().window().maximize();
 
-    @After
-    public void tearDown(Scenario scenario) {
-        if (scenario.isFailed()) {
-            System.out.println("❌ Scenario failed: " + scenario.getName());
-        } else {
-            System.out.println("✅ Scenario passed: " + scenario.getName());
-        }
+		// Build timestamped SparkReport folder path
+		String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss"));
+		sparkFolder = System.getProperty("user.dir") + "/test-output/SparkReport " + timestamp + "/Screenshots";
+		new File(sparkFolder).mkdirs(); // create folder structure
+	}
 
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+	@After
+	public void tearDown(Scenario scenario) {
+		if (scenario.isFailed()) {
+			System.out.println("❌ Scenario failed: " + scenario.getName());
+		} else {
+			System.out.println("✅ Scenario passed: " + scenario.getName());
+		}
 
-    @AfterStep
-    public void addScreenshot(Scenario scenario) {
-        if (scenario.isFailed() && driver != null) {
-            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "Failure Screenshot");
-        }
-    }
+		if (driver != null) {
+			driver.quit();
+		}
+	}
+
+	@AfterStep
+	public void addScreenshot(Scenario scenario) {
+		if (scenario.isFailed() && driver != null) {
+			// Save to Spark folder
+			File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			String screenshotName = scenario.getName().replaceAll("[^a-zA-Z0-9]", "_") + ".png";
+			String timestamp = java.time.LocalDateTime.now()
+					.format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss"));
+			String sparkFolder = System.getProperty("user.dir") + "/test-output/SparkReport " + timestamp
+					+ "/Screenshots";
+			new File(sparkFolder).mkdirs();
+			String screenshotPath = sparkFolder + "/" + screenshotName;
+
+			try {
+				FileUtils.copyFile(src, new File(screenshotPath));
+				ExtentCucumberAdapter.addTestStepScreenCaptureFromPath("Screenshots/" + screenshotName);
+
+				// ✅ Add to Allure
+				byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+				scenario.attach(screenshotBytes, "image/png", "Failure Screenshot");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }
