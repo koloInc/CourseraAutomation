@@ -1,4 +1,4 @@
-package testRunner_TestNG;
+package testRunner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
@@ -34,7 +34,7 @@ import org.testng.annotations.*;
 //    	    dryRun = false,
 //    	    publish = true
 )
-public class TestNGTestRunner extends AbstractTestNGCucumberTests {
+public class TestRunner_TestNG extends AbstractTestNGCucumberTests {
 
     @Override
     @DataProvider(parallel = false)

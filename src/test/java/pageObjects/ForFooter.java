@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import linearFlow.WaitUtils;
+import utilities.WaitUtils;
 
 public class ForFooter extends BasePage {
 

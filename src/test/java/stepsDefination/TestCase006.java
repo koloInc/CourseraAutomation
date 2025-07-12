@@ -51,7 +51,7 @@ public class TestCase006 {
 
 	@Then("the application should display the purchase summary")
 	public void the_application_should_display_the_purchase_summary() {
-		testUtils.WaitUtils.waitForDuration(driver, 2);
+		utilities.WaitUtils.waitForDuration(driver, 2);
 		String summary = forBusiness.getPurchaseSummary();
 		int rowNo = 1;
 		String expected = xl.getCellData(Constants.SHEET_BusinessPlan, 1, 3);
