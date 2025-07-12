@@ -71,4 +71,6 @@ public class Constants {
     //XML File Path
     public static final String XML_FILE = "CourseraAutomation.xml";
     
+    public static final String SHEET_JOB_LISTINGS = "JobListings";
+    
 }
