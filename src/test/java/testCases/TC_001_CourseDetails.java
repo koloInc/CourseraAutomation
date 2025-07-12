@@ -7,11 +7,11 @@ import pageObjects.HomePage;
 import testBase.BaseClass;
 public class TC_001_CourseDetails extends BaseClass{
 	@Test
-	public void Courses()
+	public void Courses() throws InterruptedException
 	{
 		HomePage hp = new HomePage(driver);
 		hp.setSearchBar("Web Development");
-		hp.submitSearch();
+		hp.submitSearch("web development");
 		
 		CoursePage page= new CoursePage (driver);
 		page.clickallLang();

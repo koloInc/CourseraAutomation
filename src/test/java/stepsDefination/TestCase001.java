@@ -25,10 +25,10 @@ public class TestCase001 {
     ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
 
     @When("the user searches for course")
-    public void the_user_searches_for() {
+    public void the_user_searches_for() throws InterruptedException {
     		String courseName=xl.getCellData(Constants.SHEET_CourseDetails,Constants.ROW_DATA,Constants.COL_SEARCH);
         CommonSteps.homePage.setSearchBar(courseName);
-        CommonSteps.homePage.submitSearch();
+        CommonSteps.homePage.submitSearch(courseName);
     }
 
     @When("filters the results by language")

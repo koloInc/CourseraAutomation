@@ -2,12 +2,15 @@
 
 package linearFlow;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Flow_1 {
 
@@ -18,11 +21,23 @@ public class Flow_1 {
 		
 		WebElement searchBar=driver.findElement(By.id("search-autocomplete-input"));
 		searchBar.sendKeys("Web Development");
-		driver.findElement(By.xpath("//*[@class=\"search-form\"]//*[@type=\"button\"][1]")).click();
-		
-//		searchBar.sendKeys(Keys.ENTER);
+//		driver.findElement(By.xpath("//*[@class=\"search-form\"]//*[@type=\"button\"][1]")).click();
+		Thread.sleep(4000);
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='react-autowhatever-1']")));
+
+		System.out.println(driver.findElement(By.xpath("//*[@id=\"react-autowhatever-1\"]")).isDisplayed());
+		List <WebElement> we=driver.findElements(By.xpath("//*[@id=\"react-autowhatever-1\"]//div[2]/span"));//		searchBar.sendKeys(Keys.ENTER);
+		for(WebElement w:we) {
+			if(w.getText().equalsIgnoreCase("web development")) {
+				w.click();
+				break;
+			}
+		}
 		
 		//For More Languages
+			
 		WebElement allLang=driver.findElement(By.cssSelector("button[aria-label='Show more Language options'] span[class='cds-button-label']"));
 		allLang.click();
 		

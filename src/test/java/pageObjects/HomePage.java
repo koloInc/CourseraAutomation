@@ -24,6 +24,9 @@ public class HomePage extends BasePage {
     
     @FindBy(xpath="//*[@id='react-autowhatever-1']")
     WebElement suggestion;
+    
+    @FindBy(xpath="//*[@id='react-autowhatever-1']//div[2]/span")
+    List <WebElement> suggestionList;
 
     @FindBy(xpath = "//a[@data-click-key='front_page.front_page_story.click.navigation_meta_nav_Business']")
     WebElement forBusiness;
@@ -62,10 +65,17 @@ public class HomePage extends BasePage {
         searchBar.sendKeys(value);
     }
 
-    public void submitSearch() {
+    public void submitSearch(String value) throws InterruptedException {
+		Thread.sleep(4000);    //remove it
     		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     		wait.until(ExpectedConditions.visibilityOf(suggestion));
-        searchBar.sendKeys(Keys.ENTER);
+//    		System.out.println(wt.isDisplayed());
+    		for(WebElement w:suggestionList) {
+    			if(w.getText().equalsIgnoreCase(value)) {
+    				w.click();
+    				break;
+    			}
+    		}
     }
 
     public void clickOnlineDegree() {

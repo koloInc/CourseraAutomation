@@ -8,10 +8,10 @@ import testBase.BaseClass;
 
 public class TC_007_CourseContent extends BaseClass{
 	@Test
-	public void aboutCourse() {
+	public void aboutCourse() throws InterruptedException {
 		HomePage hp = new HomePage(driver);
 		hp.setSearchBar("Web Development");
-		hp.submitSearch();
+		hp.submitSearch("web development");
 		
 		CourseContent page=new CourseContent(driver);
 		page.getTitle();

@@ -1,7 +1,7 @@
 Feature: Course Search and Details Extraction
 
 Scenario: Search and extract details of multiple courses
-  Given the user is on the homepage   #here
+  Given the user is on the homepage
   When the user searches for course
   And filters the results by language
   And filters the results by level
