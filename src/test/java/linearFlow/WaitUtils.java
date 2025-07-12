@@ -1,4 +1,4 @@
-package utilities;
+package linearFlow;
 
 import java.time.Duration;
 
