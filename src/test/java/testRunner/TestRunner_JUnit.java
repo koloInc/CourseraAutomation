@@ -1,4 +1,4 @@
-package testRunner_JUnit;
+package testRunner;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ import utilities.ReportGenerator;
 //  dryRun = false,
 //  publish = true
 )
-public class JunitTestRunner {
+public class TestRunner_JUnit {
 	@AfterClass
     public static void generateReport() {
         ReportGenerator.runAllureBatchFile();
