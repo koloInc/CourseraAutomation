@@ -141,17 +141,19 @@ public class ExcelUtils {
         } 
     }
 
-    // Test main method
-    public static void main(String[] args) throws IOException {
- 
-        ExcelUtils es = new ExcelUtils("CourseraAutomationData.xlsx");
-        System.out.println(System.getProperty("user.dir") + "\\src\\test\\resources\\CourseraAutomationData.xlsx");
-        System.out.println("Row Count: " + es.getRowCount("CourseDetails"));
-        System.out.println("Column Cont: " + es.getColumnCount("CourseDetails"));
-        System.out.println("Cell Data: " + es.getCellData("CourseDetails", 0, 1));
-
-//        es.setCellData("CourseDetails", 1, "Title", "Doee");
-//        es.fillRedColor("Testing", 1, 2);
-        es.closeFile();
-    }
+    /** Example Usage
+     * 
+	 *   public static void main(String[] args) throws IOException {
+	 *
+	 *       ExcelUtils es = new ExcelUtils("CourseraAutomationData.xlsx");
+	 *       System.out.println(System.getProperty("user.dir") + "\\src\\test\\resources\\CourseraAutomationData.xlsx");
+	 *       System.out.println("Row Count: " + es.getRowCount("CourseDetails"));
+	 *       System.out.println("Column Cont: " + es.getColumnCount("CourseDetails"));
+	 *       System.out.println("Cell Data: " + es.getCellData("CourseDetails", 0, 1));
+	 *
+	 *		es.setCellData("CourseDetails", 1, "Title", "Doee");
+	 *		es.fillRedColor("Testing", 1, 2);
+	 *       es.closeFile();
+	 *   }
+     */
 }
