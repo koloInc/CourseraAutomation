@@ -10,12 +10,13 @@ import utilities.ReportGenerator;
 @CucumberOptions(
     features = {
         //"features/testCase006.feature",
-         "features/testCase006.feature",
+         "features/testCase011.feature",
         // "features/testCase005.feature",
         // "features/testCase006.feature",
         // "features/testCase007.feature",
         // "features/testCase010.feature",
     },
+    		//features= {"@target/rerun.txt"},
     glue = {
         "stepsDefination",
         "hooks"
@@ -25,7 +26,8 @@ import utilities.ReportGenerator;
         "html:test-output/cucumber-reports.html",
         "json:test-output/cucumber.json",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+        //"rerun:target/rerun.txt",
         
     },
     monochrome = true

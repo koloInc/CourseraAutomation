@@ -19,6 +19,7 @@ import org.testng.annotations.*;
 //         "features/testCase009.feature",
          "features/testCase010.feature"
     },
+    		//features= {"@target/rerun.txt"},
     glue = {
         "stepsDefination",
         "hooks"
@@ -28,7 +29,8 @@ import org.testng.annotations.*;
             "html:test-output/cucumber-reports.html",
             "json:test-output/cucumber.json",
             "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-            "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+            "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+           // "rerun:target/rerun.txt",
     },
     monochrome = true
 //    	    dryRun = false,

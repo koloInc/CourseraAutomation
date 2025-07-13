@@ -1,7 +1,8 @@
 package pageObjects;
 
 import java.time.Duration;
-//import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -28,23 +29,21 @@ public class ForFooter extends BasePage {
     JavascriptExecutor js;
     String mainWindow;
 
-    // Social Media Wrapper
     @FindBy(xpath = "//div[@class='lazyload-wrapper']")
     WebElement socialMediaWrapper;
-
-    // Action Methods
 
     public void scrollToFooter() throws InterruptedException {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         Thread.sleep(3000);
     }
 
-    public void openSocialMediaLinks() throws InterruptedException {
+    public Map<String, String[]> openSocialMediaLinks() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Map<String, String[]> results = new LinkedHashMap<>();
 
         String[] socialMediaAlts = {
             "Coursera Facebook", "Coursera Linkedin", "Coursera YouTube",
-             "Coursera Instagram", "Coursera TikTok"
+            "Coursera Instagram", "Coursera TikTok"
         };
 
         for (String alt : socialMediaAlts) {
@@ -55,7 +54,6 @@ public class ForFooter extends BasePage {
                 String href = link.getAttribute("href");
 
                 js.executeScript("window.open(arguments[0]);", href);
-//                Thread.sleep(2000);
                 WaitUtils.waitForDuration(driver, 2);
 
                 Set<String> allWindows = driver.getWindowHandles();
@@ -66,21 +64,19 @@ public class ForFooter extends BasePage {
                     }
                 }
 
-                Thread.sleep(3000);
-                System.out.println(driver.getTitle() + " - " + driver.getCurrentUrl());
-//                System.out.println(driver.getTitle());
+//                Thread.sleep(3000);
+                WaitUtils.waitForDuration(driver, 3);
+                String title = driver.getTitle();
+                String url = driver.getCurrentUrl();
+                results.put(alt, new String[] { title, url });
 
                 driver.close();
                 driver.switchTo().window(mainWindow);
             } catch (NoSuchElementException e) {
-                System.out.println("Social media icon not found for alt: " + alt);
+                results.put(alt, new String[] { "Icon not found", "N/A" });
             }
         }
-    }
 
-
-    public void verifyTitlesAndUrls() {
-        // Placeholder for future validation logic
-        System.out.println("Verification logic can be added here.");
+        return results;
     }
 }
