@@ -1,6 +1,6 @@
 package pageObjects;
 
-//import java.io.IOException;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
@@ -43,16 +43,24 @@ public class ForFooter extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String sheet = Constants.SHEET_FooterSocialLinkValidation;
         int rowCount = xl.getRowCount(sheet);
-        
-        String[] socialMediaAlts = {
-                "Coursera Facebook", "Coursera Linkedin", "Coursera YouTube",
-                 "Coursera Instagram", "Coursera TikTok"
-            };
 
-        for (int i = 1; i < rowCount; i++) {
-            String predictedTitle = xl.getCellData(sheet, i, xl.getColumnIndex(sheet, "Predicted Title"));
-            String predictedLink = xl.getCellData(sheet, i, xl.getColumnIndex(sheet, "Predicted Link"));
-            String alt = "Coursera " + predictedTitle.split("\\|")[0].trim(); // e.g., "Coursera Facebook"
+        String[] socialMediaAlts = {
+            "Coursera Facebook",
+            "Coursera Linkedin",
+            "Coursera YouTube",
+            "Coursera Instagram",
+            "Coursera TikTok"
+        };
+
+        for (String alt : socialMediaAlts) {
+            int rowIndex = findRowIndexByAlt(sheet, alt);
+            if (rowIndex == -1) {
+                System.out.println("No matching row found in Excel for alt: " + alt);
+                continue;
+            }
+
+            String predictedTitle = xl.getCellData(sheet, rowIndex, xl.getColumnIndex(sheet, "Predicted Title"));
+            String predictedLink = xl.getCellData(sheet, rowIndex, xl.getColumnIndex(sheet, "Predicted Link"));
 
             try {
                 wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@alt='" + alt + "']")));
@@ -76,6 +84,7 @@ public class ForFooter extends BasePage {
                 String actualLink = driver.getCurrentUrl();
 
                 Map<String, String> result = new HashMap<>();
+                result.put("RowIndex", String.valueOf(rowIndex));
                 result.put("Predicted Title", predictedTitle);
                 result.put("Actual Title", actualTitle);
                 result.put("VALIDATION Title", actualTitle.equals(predictedTitle) ? "PASS" : "FAIL");
@@ -84,20 +93,58 @@ public class ForFooter extends BasePage {
                 result.put("VALIDATION Link", actualLink.equals(predictedLink) ? "PASS" : "FAIL");
                 socialMediaResults.add(result);
 
-                // Write to Excel
-                xl.setCellData(sheet, i, "Actual Title", actualTitle);
-                xl.setCellData(sheet, i, "Actual Link", actualLink);
-                xl.setCellData(sheet, i, "VALIDATION Title", result.get("VALIDATION Title"));
-                xl.setCellData(sheet, i, "VALIDATION Link", result.get("VALIDATION Link"));
-
                 driver.close();
                 driver.switchTo().window(mainWindow);
             } catch (Exception e) {
                 System.out.println("Error processing: " + alt + " - " + e.getMessage());
+                driver.switchTo().window(mainWindow); // Ensure return to main window
             }
         }
 
+        writeResultsToExcel(sheet);
         xl.closeFile();
+    }
+
+    private void writeResultsToExcel(String sheet) {
+        for (Map<String, String> result : socialMediaResults) {
+            try {
+                int rowIndex = Integer.parseInt(result.get("RowIndex"));
+                xl.setCellData(sheet, rowIndex, "Actual Title", result.get("Actual Title"));
+                xl.setCellData(sheet, rowIndex, "Actual Link", result.get("Actual Link"));
+                xl.setCellData(sheet, rowIndex, "VALIDATION Title", result.get("VALIDATION Title"));
+                xl.setCellData(sheet, rowIndex, "VALIDATION Link", result.get("VALIDATION Link"));
+
+                int titleCol = xl.getColumnIndex(sheet, "VALIDATION Title");
+                int linkCol = xl.getColumnIndex(sheet, "VALIDATION Link");
+
+                if ("PASS".equals(result.get("VALIDATION Title"))) {
+                    xl.fillGreenColor(sheet, rowIndex, titleCol);
+                } else {
+                    xl.fillRedColor(sheet, rowIndex, titleCol);
+                }
+
+                if ("PASS".equals(result.get("VALIDATION Link"))) {
+                    xl.fillGreenColor(sheet, rowIndex, linkCol);
+                } else {
+                    xl.fillRedColor(sheet, rowIndex, linkCol);
+                }
+            } catch (IOException e) {
+                System.out.println("Excel write error: " + e.getMessage());
+            }
+        }
+    }
+
+    private int findRowIndexByAlt(String sheet, String alt) {
+        int rowCount = xl.getRowCount(sheet);
+        String altKey = alt.replace("Coursera ", "").toLowerCase().trim();
+
+        for (int i = 1; i < rowCount; i++) {
+            String predictedTitle = xl.getCellData(sheet, i, xl.getColumnIndex(sheet, "Predicted Title")).toLowerCase().trim();
+            if (predictedTitle.contains(altKey)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void verifyTitlesAndUrls() {
