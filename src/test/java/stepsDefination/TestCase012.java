@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import factory.BaseClass;
 import io.cucumber.java.en.Then;
@@ -21,9 +23,11 @@ public class TestCase012 {
     ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
     CareersPage careersPage;
     String mainWindow;
+    private static final Logger logger = LogManager.getLogger(TestCase012.class);
 
     @When("the user navigates to the Careers page")
     public void navigate_to_careers() {
+        logger.info("Navigating to the Careers page.");
         careersPage = new CareersPage(driver);
         mainWindow = driver.getWindowHandle();
         careersPage.clickCareersLink();
@@ -31,32 +35,44 @@ public class TestCase012 {
 
     @When("clicks on See Open Positions")
     public void click_open_positions() {
+        logger.info("Clicking on 'See Open Positions'.");
         careersPage.clickOpenPositions();
         careersPage.switchToNewTab(mainWindow);
+        logger.info("Switched to new tab for job listings.");
     }
 
     @When("filters jobs by country India")
     public void filter_jobs_india() throws InterruptedException {
         String country = xml.getElementValue("country_short");
+        logger.info("Filtering jobs by country: " + country);
         careersPage.filterByCountry(country);
     }
 
     @Then("the user should see a list of job openings in India")
     public void display_job_listings() {
+        logger.info("Extracting job listings for India.");
         List<Map<String, String>> jobs = careersPage.getJobListings();
         int rowIndex = 1;
 
         for (Map<String, String> job : jobs) {
+            String title = job.get("Title");
+            String department = job.get("Department");
+            String location = job.get("Location");
+
+            logger.debug("Job " + rowIndex + " → Title: " + title + ", Department: " + department + ", Location: " + location);
+
             try {
-                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Title", job.get("Title"));
-                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Department", job.get("Department"));
-                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Location", job.get("Location"));
-                rowIndex++;
+                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Title", title);
+                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Department", department);
+                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Location", location);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Failed to write job listing to Excel at row " + rowIndex, e);
             }
+
+            rowIndex++;
         }
 
         xl.closeFile();
+        logger.info("Job listings successfully written to Excel.");
     }
 }

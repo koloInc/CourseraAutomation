@@ -18,8 +18,11 @@ import org.testng.annotations.*;
 //         "features/testCase008.feature",
 //         "features/testCase009.feature",
          "features/testCase010.feature"
+    		
+    		// To rerun only failed tests:
+            //"@target/rerun.txt"
     },
-    		//features= {"@target/rerun.txt"},
+    		
     glue = {
         "stepsDefination",
         "hooks"
