@@ -48,9 +48,9 @@ public class TestCase012 {
 
         for (Map<String, String> job : jobs) {
             try {
-                xl.setCellData(Constants.SHEET_JOB_LISTINGS, rowIndex, "Title", job.get("Title"));
-                xl.setCellData(Constants.SHEET_JOB_LISTINGS, rowIndex, "Department", job.get("Department"));
-                xl.setCellData(Constants.SHEET_JOB_LISTINGS, rowIndex, "Location", job.get("Location"));
+                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Title", job.get("Title"));
+                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Department", job.get("Department"));
+                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Location", job.get("Location"));
                 rowIndex++;
             } catch (IOException e) {
                 e.printStackTrace();

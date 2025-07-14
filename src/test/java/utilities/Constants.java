@@ -12,6 +12,8 @@ public class Constants {
     public static final String SHEET_GovtFileValidation = "GovtFileValidation";
     public static final String SHEET_FooterValidation = "FooterValidation";
     public static final String SHEET_AppStorePlayStore = "AppStore&PlayStore";
+    public static final String SHEET_FooterSocialLinkValidation = "FooterSocialLinkValidation";
+    public static final String SHEET_CareersJobListings = "CareersJobListings";
     
     
     // Handling CourseDetails 1

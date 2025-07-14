@@ -1,20 +1,17 @@
 package pageObjects;
 
+//import java.io.IOException;
 import java.time.Duration;
-//import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import linearFlow.WaitUtils;
+import utilities.Constants;
+import utilities.ExcelUtils;
 
 public class ForFooter extends BasePage {
 
@@ -27,27 +24,32 @@ public class ForFooter extends BasePage {
 
     JavascriptExecutor js;
     String mainWindow;
+    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    private List<Map<String, String>> socialMediaResults = new ArrayList<>();
 
-    // Social Media Wrapper
     @FindBy(xpath = "//div[@class='lazyload-wrapper']")
     WebElement socialMediaWrapper;
 
-    // Action Methods
+    public List<Map<String, String>> getSocialMediaResults() {
+        return socialMediaResults;
+    }
 
     public void scrollToFooter() throws InterruptedException {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        Thread.sleep(3000);
+        WaitUtils.waitForDuration(driver, 3);
+//        Thread.sleep(3000);
     }
 
     public void openSocialMediaLinks() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        String sheet = Constants.SHEET_FooterSocialLinkValidation;
+        int rowCount = xl.getRowCount(sheet);
 
-        String[] socialMediaAlts = {
-            "Coursera Facebook", "Coursera Linkedin", "Coursera YouTube",
-             "Coursera Instagram", "Coursera TikTok"
-        };
+        for (int i = 1; i < rowCount; i++) {
+            String predictedTitle = xl.getCellData(sheet, i, xl.getColumnIndex(sheet, "Predicted Title"));
+            String predictedLink = xl.getCellData(sheet, i, xl.getColumnIndex(sheet, "Predicted Link"));
+            String alt = "Coursera " + predictedTitle.split("\\|")[0].trim(); // e.g., "Coursera Facebook"
 
-        for (String alt : socialMediaAlts) {
             try {
                 wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@alt='" + alt + "']")));
                 WebElement icon = driver.findElement(By.xpath("//img[@alt='" + alt + "']"));
@@ -55,7 +57,6 @@ public class ForFooter extends BasePage {
                 String href = link.getAttribute("href");
 
                 js.executeScript("window.open(arguments[0]);", href);
-//                Thread.sleep(2000);
                 WaitUtils.waitForDuration(driver, 2);
 
                 Set<String> allWindows = driver.getWindowHandles();
@@ -66,21 +67,36 @@ public class ForFooter extends BasePage {
                     }
                 }
 
-                Thread.sleep(3000);
-                System.out.println(driver.getTitle() + " - " + driver.getCurrentUrl());
-//                System.out.println(driver.getTitle());
+                WaitUtils.waitForDuration(driver, 3);
+                String actualTitle = driver.getTitle();
+                String actualLink = driver.getCurrentUrl();
+
+                Map<String, String> result = new HashMap<>();
+                result.put("Predicted Title", predictedTitle);
+                result.put("Actual Title", actualTitle);
+                result.put("VALIDATION Title", actualTitle.equals(predictedTitle) ? "PASS" : "FAIL");
+                result.put("Predicted Link", predictedLink);
+                result.put("Actual Link", actualLink);
+                result.put("VALIDATION Link", actualLink.equals(predictedLink) ? "PASS" : "FAIL");
+                socialMediaResults.add(result);
+
+                // Write to Excel
+                xl.setCellData(sheet, i, "Actual Title", actualTitle);
+                xl.setCellData(sheet, i, "Actual Link", actualLink);
+                xl.setCellData(sheet, i, "VALIDATION Title", result.get("VALIDATION Title"));
+                xl.setCellData(sheet, i, "VALIDATION Link", result.get("VALIDATION Link"));
 
                 driver.close();
                 driver.switchTo().window(mainWindow);
-            } catch (NoSuchElementException e) {
-                System.out.println("Social media icon not found for alt: " + alt);
+            } catch (Exception e) {
+                System.out.println("Error processing: " + alt + " - " + e.getMessage());
             }
         }
+
+        xl.closeFile();
     }
 
-
     public void verifyTitlesAndUrls() {
-        // Placeholder for future validation logic
-        System.out.println("Verification logic can be added here.");
+        System.out.println("Verification logic completed. Results stored in Excel.");
     }
 }
