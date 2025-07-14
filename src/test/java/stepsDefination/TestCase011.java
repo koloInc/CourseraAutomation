@@ -43,7 +43,7 @@ public class TestCase011 {
 
         for (Map<String, String> row : results) {
             try {
-                String predictedTitle = row.get("Predicted Title"+"ok");
+                String predictedTitle = row.get("Predicted Title");
                 String actualTitle = row.get("Actual Title");
                 String titleValidation = row.get("VALIDATION Title");
                 String predictedLink = row.get("Predicted Link");
