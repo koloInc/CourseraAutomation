@@ -378,3 +378,23 @@ $3,190
 14-day refund guarantee
 ================================================================================
 
+
+--- Purchase Summary (TC006) ---
+2025-07-14T14:04:55.783911600
+
+Purchase Summary
+Selected subscription
+Team plan (price per user per year)
+$319
+Number of users
+x 10
+Total
+$3,190
+Annual Payment
+Annual total
+$3,190
+Today's Payment
+$3,190
+14-day refund guarantee
+================================================================================
+
