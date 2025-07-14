@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
-import linearFlow.WaitUtils;
+import utilities.WaitUtils;
 import utilities.Constants;
 import utilities.ExcelUtils;
 
@@ -36,14 +36,18 @@ public class ForFooter extends BasePage {
 
     public void scrollToFooter() throws InterruptedException {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        WaitUtils.waitForDuration(driver, 3);
-//        Thread.sleep(3000);
+        WaitUtils.waitForDuration(driver, 2);
     }
 
     public void openSocialMediaLinks() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String sheet = Constants.SHEET_FooterSocialLinkValidation;
         int rowCount = xl.getRowCount(sheet);
+        
+        String[] socialMediaAlts = {
+                "Coursera Facebook", "Coursera Linkedin", "Coursera YouTube",
+                 "Coursera Instagram", "Coursera TikTok"
+            };
 
         for (int i = 1; i < rowCount; i++) {
             String predictedTitle = xl.getCellData(sheet, i, xl.getColumnIndex(sheet, "Predicted Title"));

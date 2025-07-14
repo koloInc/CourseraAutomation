@@ -3,6 +3,9 @@ package stepsDefination;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.ForBusiness;
@@ -17,12 +20,15 @@ public class TestCase003 {
     ForGovernment forGovernment;
     ForBusiness forBusiness;
     XMLUtils xml = new XMLUtils(Constants.XML_FILE);
-    ExcelUtils xl=new ExcelUtils(Constants.EXCEL_FILE);
-    
+    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    private static final Logger logger = LogManager.getLogger(TestCase003.class);
+
     @When("the user fills out the government request form with invalid email and phone number")
     public void the_user_fills_out_the_government_request_form_with_invalid_email_and_phone_number() {
+        logger.info("Filling out government request form with invalid email and phone number.");
         driver = BaseClass.getDriver();
         forGovernment = new ForGovernment(driver);
+
         forGovernment.setFirstName(BaseClass.randomeString());
         forGovernment.setLastName(BaseClass.randomeString());
         forGovernment.setEmail(BaseClass.randomMobileNumber());
@@ -32,31 +38,39 @@ public class TestCase003 {
         forGovernment.setOrgName(BaseClass.randomeString());
         forGovernment.selectOrgSize(BaseClass.randomNumberInRange(1, 5));
         forGovernment.selectAboutYou(BaseClass.randomNumberInRange(1, 5));
-        String country = xml.getElementValue("country") ;
+        String country = xml.getElementValue("country");
         forGovernment.selectCountry(country);
+
+        logger.debug("Country selected: " + country);
     }
 
     @When("submits the request for information")
     public void submits_the_request_for_information() {
+        logger.info("Submitting the government request form.");
         forGovernment.clickRequestInfo();
     }
 
     @Then("the application should display appropriate error messages for email and phone number")
     public void the_application_should_display_appropriate_error_messages_for_email_and_phone_number() {
+        logger.info("Validating error messages for email and phone number.");
         forBusiness = new ForBusiness(driver);
-        //System.out.println("Email Error Message: " + forBusiness.getEmailError());
+
         try {
-			xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_EMAIL_ERR, forBusiness.getEmailError());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+            String emailError = forBusiness.getEmailError();
+            xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_EMAIL_ERR, emailError);
+            logger.warn("Email Error Message: " + emailError);
+        } catch (IOException e) {
+            logger.error("Failed to write email error to Excel", e);
+        }
+
         BaseClass.pressTabKey();
-        //System.out.println("Phone Error Message: " + forBusiness.getPoneError());
+
         try {
-			xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_PHONE_ERR, forBusiness.getPoneError());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            String phoneError = forBusiness.getPoneError();
+            xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_PHONE_ERR, phoneError);
+            logger.warn("Phone Error Message: " + phoneError);
+        } catch (IOException e) {
+            logger.error("Failed to write phone error to Excel", e);
+        }
     }
 }
