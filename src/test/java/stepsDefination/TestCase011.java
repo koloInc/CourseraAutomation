@@ -39,10 +39,11 @@ public class TestCase011 {
         List<Map<String, String>> results = footerPage.getSocialMediaResults();
         ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
         int rowIndex = 1;
+        boolean hasValidationFailure = false;
 
         for (Map<String, String> row : results) {
             try {
-                String predictedTitle = row.get("Predicted Title");
+                String predictedTitle = row.get("Predicted Title"+"ok");
                 String actualTitle = row.get("Actual Title");
                 String titleValidation = row.get("VALIDATION Title");
                 String predictedLink = row.get("Predicted Link");
@@ -58,6 +59,11 @@ public class TestCase011 {
                 xl.setCellData(Constants.SHEET_FooterSocialLinkValidation, rowIndex, "Actual Link", actualLink);
                 xl.setCellData(Constants.SHEET_FooterSocialLinkValidation, rowIndex, "VALIDATION Link", linkValidation);
 
+                if ("Failed".equalsIgnoreCase(titleValidation) || "Failed".equalsIgnoreCase(linkValidation)) {
+                    logger.warn("Validation failed at row " + rowIndex + ": Title or Link mismatch.");
+                    hasValidationFailure = true;
+                }
+
                 rowIndex++;
             } catch (IOException e) {
                 logger.error("Failed to write social media validation data to Excel at row " + rowIndex, e);
@@ -66,5 +72,10 @@ public class TestCase011 {
 
         xl.closeFile();
         logger.info("Social media validation results successfully written to Excel.");
+
+        if (hasValidationFailure) {
+            throw new AssertionError("One or more social media validations failed. See logs and Excel for details.");
+        }
     }
+
 }
