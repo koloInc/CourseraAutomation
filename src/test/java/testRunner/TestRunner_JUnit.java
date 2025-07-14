@@ -12,9 +12,10 @@ import utilities.ReportGenerator;
     features = {
         // To run all tests:
         //"features",
+    		"features/testCase006.feature",
 
         // To rerun only failed tests:
-         "@target/rerun.txt"
+         //"@target/rerun.txt"
     },
     glue = {
         "stepsDefination",
