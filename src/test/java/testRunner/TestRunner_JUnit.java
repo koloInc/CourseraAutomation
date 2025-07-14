@@ -2,6 +2,7 @@ package testRunner;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
+
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import utilities.ReportGenerator;
@@ -9,14 +10,12 @@ import utilities.ReportGenerator;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = {
-        //"features/testCase006.feature",
-         "features/testCase011.feature",
-        // "features/testCase005.feature",
-        // "features/testCase006.feature",
-        // "features/testCase007.feature",
-        // "features/testCase010.feature",
+        // To run all tests:
+        //"features",
+
+        // To rerun only failed tests:
+         "@target/rerun.txt"
     },
-    		//features= {"@target/rerun.txt"},
     glue = {
         "stepsDefination",
         "hooks"
@@ -27,16 +26,16 @@ import utilities.ReportGenerator;
         "json:test-output/cucumber.json",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
         "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
-        //"rerun:target/rerun.txt",
-        
+        "rerun:target/rerun.txt" 
     },
     monochrome = true
-//  dryRun = false,
-//  publish = true
+//    	    dryRun = false,
+//    	    publish = true
 )
 public class TestRunner_JUnit {
-	@AfterClass
+
+    @AfterClass
     public static void generateReport() {
-        ReportGenerator.runAllureBatchFile();
+        ReportGenerator.runAllureBatchFile(); 
     }
 }
