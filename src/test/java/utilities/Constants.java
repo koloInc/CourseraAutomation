@@ -27,7 +27,7 @@ public class Constants {
  
     //For List of Languauge 2
     public static final String COL_LANG_LIST= "Language";
-    public static final String COL_NUM_COURSE= "No of Course";
+    public static final String COL_NUM_COURSE= "Available Course";
 
     //For Business 3
     public static final String COL_EMAIL_ERR= "Email Error Message";
