@@ -11,9 +11,12 @@ import utilities.ReportGenerator;
 @CucumberOptions(
     features = {
         // To run all tests:
-        //"features",
+        "features",
+
     		
-    		"features/testCase011.feature",
+//    		"features/testCase011.feature",
+//
+//    		"features/testCase006.feature",
 
         // To rerun only failed tests:
          //"@target/rerun.txt"
@@ -32,7 +35,12 @@ import utilities.ReportGenerator;
     },
     monochrome = true
 //    	    dryRun = false,
-//    	    publish = true
+//    	    publish = true,
+    			//tags="@sanity"  // this will execute scenarios tagged with @sanity
+			//tags="@regression"
+			//tags="@sanity and @regression" //Scenarios tagged with both @sanity and @regression
+			//tags="@sanity and not @regression" //Scenarios tagged with @sanity but not tagged with @regression
+			//tags="@sanity or @regression" //Scenarios tagged with either @sanity or @regression
 )
 public class TestRunner_JUnit {
 
