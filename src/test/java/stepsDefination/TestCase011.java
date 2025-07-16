@@ -1,24 +1,21 @@
 package stepsDefination;
-
+ 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
+ 
+import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.junit.Assert;
-
+ 
 import factory.BaseClass;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import pageObjects.ForFooter;
 import utilities.Constants;
 import utilities.ExcelUtils;
-
+ 
 public class TestCase011 {
-
-	WebDriver driver = BaseClass.getDriver();
+ 
+    WebDriver driver = BaseClass.getDriver();
     ForFooter footerPage;
     ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase011.class);
@@ -93,6 +90,4 @@ public class TestCase011 {
             throw new AssertionError("One or more social media validations failed. See logs and Excel for details.");
         }
     }
-
-
 }

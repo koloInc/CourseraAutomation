@@ -11,8 +11,12 @@ import utilities.ReportGenerator;
 @CucumberOptions(
     features = {
         // To run all tests:
-        //"features",
-    		"features/testCase011.feature",
+        "features",
+
+    		
+//    		"features/testCase011.feature",
+//
+//    		"features/testCase006.feature",
 
         // To rerun only failed tests:
          //"@target/rerun.txt"
