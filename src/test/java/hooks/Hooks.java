@@ -1,30 +1,30 @@
 package hooks;
-
+ 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
-
+ 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-
+ 
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
-
+ 
 import factory.BaseClass;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-
+ 
 public class Hooks {
-
+ 
 	WebDriver driver;
 	Properties p;
 	String sparkFolder;
-
+ 
 	@Before
 	public void setup() throws IOException {
 		driver = BaseClass.initilizeBrowser();
@@ -32,13 +32,13 @@ public class Hooks {
 		p = BaseClass.getProperties();
 		driver.get(p.getProperty("appURL"));
 		driver.manage().window().maximize();
-
+ 
 		// Build timestamped SparkReport folder path
 		String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss"));
 		sparkFolder = System.getProperty("user.dir") + "/test-output/SparkReport " + timestamp + "/Screenshots";
 		new File(sparkFolder).mkdirs(); // create folder structure
 	}
-
+ 
 	@After
 	public void tearDown(Scenario scenario) {
 		if (scenario.isFailed()) {
@@ -46,12 +46,12 @@ public class Hooks {
 		} else {
 			System.out.println("✅ Scenario passed: " + scenario.getName());
 		}
-
+ 
 		if (driver != null) {
 			driver.quit();
 		}
 	}
-
+ 
 	@AfterStep
 	public void addScreenshot(Scenario scenario) {
 		if (scenario.isFailed() && driver != null) {
@@ -64,18 +64,22 @@ public class Hooks {
 					+ "/Screenshots";
 			new File(sparkFolder).mkdirs();
 			String screenshotPath = sparkFolder + "/" + screenshotName;
-
+ 
 			try {
 				FileUtils.copyFile(src, new File(screenshotPath));
-				ExtentCucumberAdapter.addTestStepScreenCaptureFromPath("Screenshots/" + screenshotName);
 
-				// ✅ Add to Allure
-				byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				scenario.attach(screenshotBytes, "image/png", "Failure Screenshot");
+				if (ExtentCucumberAdapter.getCurrentStep() != null) {
+				        ExtentCucumberAdapter.addTestStepScreenCaptureFromPath("Screenshots/" + screenshotName);
+				    }
+				
+				    // ✅ Add to Allure
+				    byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+				    scenario.attach(screenshotBytes, "image/png", "Failure Screenshot");
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
+ 
 }
