@@ -11,19 +11,11 @@ import utilities.ReportGenerator;
 @CucumberOptions(
     features = {
         // To run all tests:
-        "features",
-<<<<<<< Updated upstream
-
-    		
-//    		"features/testCase011.feature",
-//
-//    		"features/testCase006.feature",
-=======
+        //"features",
     		//"features/testCase011.feature",
->>>>>>> Stashed changes
 
         // To rerun only failed tests:
-        // "@target/rerun.txt"
+         "@target/rerun.txt"
     },
     glue = {
         "stepsDefination",

@@ -22,9 +22,11 @@ public class TestCase005 {
 
     @When("the user navigates to the Online Degrees section")
     public void the_user_navigates_to_the_online_degrees_section() {
+    		
         logger.info("Navigating to the Online Degrees section.");
         CommonSteps.homePage.clickOnlineDegree();
         driver = BaseClass.getDriver();
+        driver.navigate().refresh();
         onlineDegrees = new OnlineDegrees(driver);
     }
 
