@@ -10,14 +10,14 @@ import org.apache.logging.log4j.Logger;
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.OnlineDegrees;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 
 public class TestCase005 {
 
     WebDriver driver;
     OnlineDegrees onlineDegrees;
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase005.class);
 
     @When("the user navigates to the Online Degrees section")
@@ -54,14 +54,14 @@ public class TestCase005 {
         List<String> cardDetails = onlineDegrees.getCollegeDetails();
         logger.debug("Total degree cards found: " + cardDetails.size());
 
-        int startingRow = Constants.ROW_DATA;
+        int startingRow = FileConstants.ROW_DATA;
 
         for (int i = 0; i < cardDetails.size(); i++) {
             String detail = cardDetails.get(i);
             logger.debug("Card " + (i + 1) + ": " + detail);
 
             try {
-                xl.setCellData(Constants.SHEET_OnlineDegree, startingRow + i, Constants.COL_CARD_DETAILS, detail);
+                xl.setCellData(FileConstants.SHEET_OnlineDegree, startingRow + i, FileConstants.COL_CARD_DETAILS, detail);
             } catch (IOException e) {
                 logger.error("Failed to write degree card detail to Excel at row " + (startingRow + i), e);
             }

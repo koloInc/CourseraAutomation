@@ -13,14 +13,14 @@ import org.apache.logging.log4j.Logger;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.HomePage;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 
 public class TestCase009 {
 
     WebDriver driver;
     HomePage homePage;
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase009.class);
 
     Map<String, Map<String, String>> footerData = new HashMap<>();
@@ -30,7 +30,7 @@ public class TestCase009 {
     public void the_user_retrieves_all_footer_sections() throws IOException {
         logger.info("Retrieving all footer sections.");
         List<WebElement> footers = CommonSteps.homePage.getAllFooter();
-        index = Constants.ROW_DATA;
+        index = FileConstants.ROW_DATA;
 
         for (WebElement footer : footers) {
             String title = CommonSteps.homePage.getFooterTitle(footer);
@@ -54,22 +54,22 @@ public class TestCase009 {
     public void the_footer_titles_and_their_links_should_be_printed_in_the_console() throws IOException {
         logger.info("Validating and writing footer titles and links to Excel.");
 
-        int rowIndex = Constants.ROW_DATA;
+        int rowIndex = FileConstants.ROW_DATA;
 
         for (Map.Entry<String, Map<String, String>> entry : footerData.entrySet()) {
             String sectionTitle = entry.getKey();
             Map<String, String> linksMap = entry.getValue();
 
             logger.info("Section: " + sectionTitle);
-            xl.setCellData(Constants.SHEET_FooterValidation, rowIndex, Constants.COL_SECTIONS, sectionTitle);
-            xl.fillGreenColor(Constants.SHEET_FooterValidation, rowIndex, 0);
+            xl.setCellData(FileConstants.SHEET_FooterValidation, rowIndex, FileConstants.COL_SECTIONS, sectionTitle);
+            xl.fillGreenColor(FileConstants.SHEET_FooterValidation, rowIndex, 0);
 
             for (Map.Entry<String, String> linkEntry : linksMap.entrySet()) {
                 String text = linkEntry.getKey();
                 String href = linkEntry.getValue();
 
-                xl.setCellData(Constants.SHEET_FooterValidation, rowIndex, Constants.COL_FOOTER_TITLE, text);
-                xl.setCellData(Constants.SHEET_FooterValidation, rowIndex, Constants.COL_FOOTER_LINK, href);
+                xl.setCellData(FileConstants.SHEET_FooterValidation, rowIndex, FileConstants.COL_FOOTER_TITLE, text);
+                xl.setCellData(FileConstants.SHEET_FooterValidation, rowIndex, FileConstants.COL_FOOTER_LINK, href);
 
                 if (href == null || href.isEmpty()) {
                     logger.error("Missing link for footer item: " + text);

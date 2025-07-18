@@ -12,15 +12,15 @@ import factory.BaseClass;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.CareersPage;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 import utilities.XMLUtils;
 
 public class TestCase012 {
 
     WebDriver driver = BaseClass.getDriver();
-    XMLUtils xml = new XMLUtils(Constants.XML_FILE);
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    XMLUtils xml = new XMLUtils(FileConstants.XML_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     CareersPage careersPage;
     String mainWindow;
     private static final Logger logger = LogManager.getLogger(TestCase012.class);
@@ -62,9 +62,9 @@ public class TestCase012 {
             logger.debug("Job " + rowIndex + " → Title: " + title + ", Department: " + department + ", Location: " + location);
 
             try {
-                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Title", title);
-                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Department", department);
-                xl.setCellData(Constants.SHEET_CareersJobListings, rowIndex, "Location", location);
+                xl.setCellData(FileConstants.SHEET_CareersJobListings, rowIndex, "Title", title);
+                xl.setCellData(FileConstants.SHEET_CareersJobListings, rowIndex, "Department", department);
+                xl.setCellData(FileConstants.SHEET_CareersJobListings, rowIndex, "Location", location);
             } catch (IOException e) {
                 logger.error("Failed to write job listing to Excel at row " + rowIndex, e);
             }

@@ -2,7 +2,11 @@ package stepsDefination;
  
 import java.io.IOException;
 import java.util.List;
+<<<<<<< Updated upstream
  
+=======
+
+>>>>>>> Stashed changes
 import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,14 +14,18 @@ import org.apache.logging.log4j.Logger;
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.ForFooter;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
  
 public class TestCase011 {
  
     WebDriver driver = BaseClass.getDriver();
     ForFooter footerPage;
+<<<<<<< Updated upstream
     ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+=======
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
+>>>>>>> Stashed changes
     private static final Logger logger = LogManager.getLogger(TestCase011.class);
  
     @When("the user scrolls to the footer")
@@ -36,6 +44,7 @@ public class TestCase011 {
     @Then("verifies the title and URL of each page")
     public void verifies_the_title_and_url_of_each_page() {
         logger.info("Verifying titles and URLs of opened social media pages.");
+<<<<<<< Updated upstream
  
         List<String> actualTitles = footerPage.getActualTitles();
         List<String> actualLinks = footerPage.getActualLinks();
@@ -77,6 +86,49 @@ public class TestCase011 {
                     hasValidationFailure = true;
                 }
  
+=======
+
+        List<String> actualTitles = footerPage.getActualTitles();
+        List<String> actualLinks = footerPage.getActualLinks();
+
+        int rowCount = xl.getRowCount(FileConstants.SHEET_FooterSocialLinkValidation);
+        boolean hasValidationFailure = false;
+
+        for (int i = 1; i < rowCount && i - 1 < actualTitles.size(); i++) {
+            try {
+                String expectedTitle = xl.getCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "Predicted Title"));
+                String expectedLink = xl.getCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "Predicted Link"));
+
+                String actualTitle = actualTitles.get(i - 1);
+                String actualLink = actualLinks.get(i - 1);
+
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "Actual Title", actualTitle);
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "Actual Link", actualLink);
+
+                String titleValidation = actualTitle.equals(expectedTitle) ? "Passed" : "Failed";
+                String linkValidation = actualLink.equals(expectedLink) ? "Passed" : "Failed";
+
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "VALIDATION Title", titleValidation);
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "VALIDATION Link", linkValidation);
+
+                int titleCol = xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "VALIDATION Title");
+                int linkCol = xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "VALIDATION Link");
+
+                if ("Passed".equalsIgnoreCase(titleValidation)) {
+                    xl.fillGreenColor(FileConstants.SHEET_FooterSocialLinkValidation, i, titleCol);
+                } else {
+                    xl.fillRedColor(FileConstants.SHEET_FooterSocialLinkValidation, i, titleCol);
+                    hasValidationFailure = true;
+                }
+
+                if ("Passed".equalsIgnoreCase(linkValidation)) {
+                    xl.fillGreenColor(FileConstants.SHEET_FooterSocialLinkValidation, i, linkCol);
+                } else {
+                    xl.fillRedColor(FileConstants.SHEET_FooterSocialLinkValidation, i, linkCol);
+                    hasValidationFailure = true;
+                }
+
+>>>>>>> Stashed changes
                 logger.debug("Row " + i + " → Title: " + actualTitle + " | Link: " + actualLink);
             } catch (IOException e) {
                 logger.error("Failed to write validation data to Excel at row " + i, e);
@@ -90,4 +142,8 @@ public class TestCase011 {
             throw new AssertionError("One or more social media validations failed. See logs and Excel for details.");
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

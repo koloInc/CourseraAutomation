@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.ForGovernment;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 import utilities.XMLUtils;
 
@@ -17,8 +17,8 @@ public class TestCase008 {
 
     WebDriver driver;
     ForGovernment forGovernment;
-    XMLUtils xml = new XMLUtils(Constants.XML_FILE);
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    XMLUtils xml = new XMLUtils(FileConstants.XML_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase008.class);
 
     @Then("the user navigates to the For Government section")
@@ -76,7 +76,7 @@ public class TestCase008 {
         logger.info("Confirmation Message: " + message);
 
         try {
-            xl.setCellData(Constants.SHEET_GovtFileValidation, row_no, "Confirmation Message", message);
+            xl.setCellData(FileConstants.SHEET_GovtFileValidation, row_no, "Confirmation Message", message);
             logger.info("Confirmation message written to Excel.");
         } catch (IOException e) {
             logger.error("Failed to write confirmation message to Excel", e);

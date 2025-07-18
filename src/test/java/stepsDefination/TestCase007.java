@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import io.cucumber.java.en.*;
 import pageObjects.CourseContent;
 import pageObjects.HomePage;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 import factory.BaseClass;
 
@@ -20,7 +20,7 @@ public class TestCase007 {
     HomePage hp;
     CourseContent coursePage;
     WebDriver driver;
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase007.class);
 
     @When("selects the first course from the results")
@@ -29,7 +29,7 @@ public class TestCase007 {
         coursePage = new CourseContent(driver);
         coursePage.getTitle();
 
-        int i = Integer.parseInt(xl.getCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_COURSE_POS));
+        int i = Integer.parseInt(xl.getCellData(FileConstants.SHEET_CourseDetailedInfo, FileConstants.ROW_DATA, FileConstants.COL_COURSE_POS));
         logger.info("Selecting course at position: " + i);
 
         coursePage.getCourseIndex(i);
@@ -44,7 +44,7 @@ public class TestCase007 {
         logger.info("Course Title: " + title);
 
         try {
-            xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_COURSE_TITLE, title);
+            xl.setCellData(FileConstants.SHEET_CourseDetailedInfo, FileConstants.ROW_DATA, FileConstants.COL_COURSE_TITLE, title);
         } catch (IOException e) {
             logger.error("Failed to write course title to Excel", e);
         }
@@ -56,7 +56,7 @@ public class TestCase007 {
         logger.info("Total Modules: " + totalModule);
 
         try {
-            xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_MODULE, totalModule);
+            xl.setCellData(FileConstants.SHEET_CourseDetailedInfo, FileConstants.ROW_DATA, FileConstants.COL_MODULE, totalModule);
         } catch (IOException e) {
             logger.error("Failed to write module count to Excel", e);
         }
@@ -68,7 +68,7 @@ public class TestCase007 {
         logger.info("Course Rating: " + rating);
 
         try {
-            xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_COURSE_RATING, rating);
+            xl.setCellData(FileConstants.SHEET_CourseDetailedInfo, FileConstants.ROW_DATA, FileConstants.COL_COURSE_RATING, rating);
         } catch (IOException e) {
             logger.error("Failed to write course rating to Excel", e);
         }
@@ -80,7 +80,7 @@ public class TestCase007 {
         logger.info("Total Reviews: " + review);
 
         try {
-            xl.setCellData(Constants.SHEET_CourseDetailedInfo, Constants.ROW_DATA, Constants.COL_REVIEW, review);
+            xl.setCellData(FileConstants.SHEET_CourseDetailedInfo, FileConstants.ROW_DATA, FileConstants.COL_REVIEW, review);
         } catch (IOException e) {
             logger.error("Failed to write review count to Excel", e);
         }
@@ -95,21 +95,21 @@ public class TestCase007 {
     @Then("the skills and learning outcomes should be displayed")
     public void the_skills_and_learning_outcomes_should_be_displayed() throws IOException {
         List<WebElement> skills = coursePage.setAllSkills();
-        int index = Constants.ROW_DATA;
+        int index = FileConstants.ROW_DATA;
 
         logger.info("Extracting skills...");
         for (WebElement skill : skills) {
             String skillText = skill.getText();
             logger.debug("Skill: " + skillText);
             try {
-                xl.setCellData(Constants.SHEET_CourseDetailedInfo, index, Constants.COL_SKILLS, skillText);
+                xl.setCellData(FileConstants.SHEET_CourseDetailedInfo, index, FileConstants.COL_SKILLS, skillText);
             } catch (IOException e) {
                 logger.error("Failed to write skill to Excel at row " + index, e);
             }
             index += 1;
         }
 
-        index = Constants.ROW_DATA;
+        index = FileConstants.ROW_DATA;
         List<WebElement> weLearn = coursePage.setAllWeLearn();
 
         logger.info("Extracting learning outcomes...");
@@ -117,7 +117,7 @@ public class TestCase007 {
             String learnText = learn.getText();
             logger.debug("Learning Outcome: " + learnText);
             try {
-                xl.setCellData(Constants.SHEET_CourseDetailedInfo, index, Constants.COL_WELEARN, learnText);
+                xl.setCellData(FileConstants.SHEET_CourseDetailedInfo, index, FileConstants.COL_WELEARN, learnText);
             } catch (IOException e) {
                 logger.error("Failed to write learning outcome to Excel at row " + index, e);
             }

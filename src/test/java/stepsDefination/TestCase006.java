@@ -10,7 +10,7 @@ import org.testng.Assert;
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.ForBusiness;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 import utilities.TextFileUtils;
 
@@ -18,7 +18,7 @@ public class TestCase006 {
 
 	WebDriver driver;
 	ForBusiness forBusiness;
-	ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+	ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
 	private static final Logger logger = LogManager.getLogger(TestCase006.class);
 
 	@Then("the user navigates to the For Business section")
@@ -42,14 +42,14 @@ public class TestCase006 {
 	@When("enters a random number of users")
 	public void enters_a_random_number_of_users_between_and() {
 		forBusiness.clickGetStarted();
-		int users = Integer.parseInt(xl.getCellData(Constants.SHEET_BusinessPlan, 1, 0));
+		int users = Integer.parseInt(xl.getCellData(FileConstants.SHEET_BusinessPlan, 1, 0));
 		logger.info("Entering number of users: " + users);
 		forBusiness.enterNumberOfUsers(users);
 	}
 
 	@When("selects the payment option")
 	public void selects_the_quarterly_payment_option() {
-		String time1 = xl.getCellData(Constants.SHEET_BusinessPlan, 1, 2);
+		String time1 = xl.getCellData(FileConstants.SHEET_BusinessPlan, 1, 2);
 		logger.info("Selecting payment option: " + time1);
 		forBusiness.selectQuarterlyPayment(time1);
 	}
@@ -59,24 +59,24 @@ public class TestCase006 {
 		utilities.WaitUtils.waitForDuration(driver, 2);
 		String summary = forBusiness.getPurchaseSummary();
 		int rowNo = 1;
-		String expected = xl.getCellData(Constants.SHEET_BusinessPlan, 1, 3);
+		String expected = xl.getCellData(FileConstants.SHEET_BusinessPlan, 1, 3);
 		String actual = forBusiness.getTotalPrice().replaceAll("[^\\d]", "").trim();
 
 		logger.info("Expected Price: " + expected);
 		logger.info("Actual Price: " + actual);
 
 		try {
-			xl.setCellData(Constants.SHEET_BusinessPlan, rowNo, "Actual", actual);
+			xl.setCellData(FileConstants.SHEET_BusinessPlan, rowNo, "Actual", actual);
 		} catch (IOException e) {
 			logger.error("Failed to write actual price to Excel", e);
 		}
 
 		String columnName = "Validation";
-		int columnNo = xl.getColumnIndex(Constants.SHEET_BusinessPlan, columnName);
+		int columnNo = xl.getColumnIndex(FileConstants.SHEET_BusinessPlan, columnName);
 		String status;
 
 		try {
-			Assert.assertEquals(actual+1, expected);
+			Assert.assertEquals(actual, expected);
 			status = "Passed";
 			logger.info("Price validation passed.");
 		} catch (AssertionError e) {
@@ -85,8 +85,8 @@ public class TestCase006 {
 
 			// Write to Excel before failing
 			try {
-				xl.setCellData(Constants.SHEET_BusinessPlan, rowNo, columnName, status);
-				xl.fillRedColor(Constants.SHEET_BusinessPlan, rowNo, columnNo);
+				xl.setCellData(FileConstants.SHEET_BusinessPlan, rowNo, columnName, status);
+				xl.fillRedColor(FileConstants.SHEET_BusinessPlan, rowNo, columnNo);
 			} catch (IOException ioException) {
 				logger.error("Failed to write failure status to Excel", ioException);
 			}

@@ -10,17 +10,17 @@ import org.apache.logging.log4j.Logger;
 import factory.BaseClass;
 import io.cucumber.java.en.Then;
 import pageObjects.CoursePage;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 
 public class TestCase002 {
 
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase002.class);
 
     @Then("the list of available languages should be displayed")
     public void the_list_of_available_languages_should_be_displayed() throws IOException {
-        int index = Constants.ROW_DATA;
+        int index = FileConstants.ROW_DATA;
         CoursePage coursePage = new CoursePage(BaseClass.getDriver());
         Map<String, Integer> languages = coursePage.getLanguages();
 
@@ -33,8 +33,8 @@ public class TestCase002 {
             String courseCount = Integer.toString(entry.getValue());
 
             try {
-                xl.setCellData(Constants.SHEET_CourseLanguage, index, Constants.COL_LANG_LIST, language);
-                xl.setCellData(Constants.SHEET_CourseLanguage, index, Constants.COL_NUM_COURSE, courseCount);
+                xl.setCellData(FileConstants.SHEET_CourseLanguage, index, FileConstants.COL_LANG_LIST, language);
+                xl.setCellData(FileConstants.SHEET_CourseLanguage, index, FileConstants.COL_NUM_COURSE, courseCount);
                 logger.debug("Row " + index + " → Language: " + language + ", Courses: " + courseCount);
             } catch (IOException e) {
                 logger.error("Failed to write language data to Excel at row " + index, e);

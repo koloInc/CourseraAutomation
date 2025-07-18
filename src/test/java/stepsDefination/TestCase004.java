@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.PartnersPage;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 import utilities.XMLUtils;
 
@@ -19,8 +19,8 @@ public class TestCase004 {
 
     WebDriver driver;
     PartnersPage partnersPage;
-    XMLUtils xml = new XMLUtils(Constants.XML_FILE);
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    XMLUtils xml = new XMLUtils(FileConstants.XML_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase004.class);
 
     @Then("the user navigates to the Partners section")
@@ -49,7 +49,7 @@ public class TestCase004 {
         int total = Math.min(Math.min(links.size(), logos.size()), names.size());
         logger.debug("Total partners found: " + total);
 
-        int startingRow = Constants.ROW_DATA;
+        int startingRow = FileConstants.ROW_DATA;
 
         for (int i = 0; i < total; i++) {
             String url = links.get(i).getAttribute("href");
@@ -59,9 +59,9 @@ public class TestCase004 {
             logger.debug(String.format("Partner %d → URL: %s | Logo Visible: %s | Name: %s", i + 1, url, visible, label));
 
             try {
-                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, Constants.COL_PARTNER_LINK, url);
-                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, Constants.COL_LOGO_DISP, visible);
-                xl.setCellData(Constants.SHEET_PartnerInfo, startingRow + i, Constants.COL_PARTNER_NAME, label);
+                xl.setCellData(FileConstants.SHEET_PartnerInfo, startingRow + i, FileConstants.COL_PARTNER_LINK, url);
+                xl.setCellData(FileConstants.SHEET_PartnerInfo, startingRow + i, FileConstants.COL_LOGO_DISP, visible);
+                xl.setCellData(FileConstants.SHEET_PartnerInfo, startingRow + i, FileConstants.COL_PARTNER_NAME, label);
             } catch (IOException e) {
                 logger.error("Failed to write partner data to Excel at row " + (startingRow + i), e);
             }

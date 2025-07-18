@@ -19,7 +19,7 @@ public class ForBusiness extends BasePage {
     @FindBy(xpath = "(//a[@href='https://www.coursera.org/purchase/plan'])[1]")
     WebElement getStarted;
 
-    @FindBy(id = "cds-react-aria-:R4ssqna:")
+    @FindBy(xpath = "//input[@aria-label='Number of users' and @placeholder='eg. 10']")
     WebElement noOfUsers;
 
     @FindBy(xpath = "//label[@for='billingType']/following-sibling::div/fieldset/span")

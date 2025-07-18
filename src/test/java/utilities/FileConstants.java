@@ -1,6 +1,6 @@
 package utilities;
 
-public class Constants {
+public class FileConstants {
 	// Sheet Names
     public static final String SHEET_CourseDetails = "CourseDetails";
     public static final String SHEET_CourseLanguage = "CourseLanguage";

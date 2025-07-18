@@ -10,7 +10,7 @@ import factory.BaseClass;
 import io.cucumber.java.en.*;
 import pageObjects.ForBusiness;
 import pageObjects.ForGovernment;
-import utilities.Constants;
+import utilities.FileConstants;
 import utilities.ExcelUtils;
 import utilities.XMLUtils;
 
@@ -19,8 +19,8 @@ public class TestCase003 {
     WebDriver driver;
     ForGovernment forGovernment;
     ForBusiness forBusiness;
-    XMLUtils xml = new XMLUtils(Constants.XML_FILE);
-    ExcelUtils xl = new ExcelUtils(Constants.EXCEL_FILE);
+    XMLUtils xml = new XMLUtils(FileConstants.XML_FILE);
+    ExcelUtils xl = new ExcelUtils(FileConstants.EXCEL_FILE);
     private static final Logger logger = LogManager.getLogger(TestCase003.class);
 
     @When("the user fills out the government request form with invalid email and phone number")
@@ -57,7 +57,7 @@ public class TestCase003 {
 
         try {
             String emailError = forBusiness.getEmailError();
-            xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_EMAIL_ERR, emailError);
+            xl.setCellData(FileConstants.SHEET_ErrorMessage, FileConstants.ROW_DATA, FileConstants.COL_EMAIL_ERR, emailError);
             logger.warn("Email Error Message: " + emailError);
         } catch (IOException e) {
             logger.error("Failed to write email error to Excel", e);
@@ -67,7 +67,7 @@ public class TestCase003 {
 
         try {
             String phoneError = forBusiness.getPoneError();
-            xl.setCellData(Constants.SHEET_ErrorMessage, Constants.ROW_DATA, Constants.COL_PHONE_ERR, phoneError);
+            xl.setCellData(FileConstants.SHEET_ErrorMessage, FileConstants.ROW_DATA, FileConstants.COL_PHONE_ERR, phoneError);
             logger.warn("Phone Error Message: " + phoneError);
         } catch (IOException e) {
             logger.error("Failed to write phone error to Excel", e);
