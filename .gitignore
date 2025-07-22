@@ -28,6 +28,6 @@ test-output/
 .settings/
 *.log   
 *.class                         
-src/test/resources/CourseraAutomationData.xlsx
+# src/test/resources/CourseraAutomationData.xlsx
 src/test/resources/PartnerData_TC6.txt
 

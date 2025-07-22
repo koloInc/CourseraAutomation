@@ -11,7 +11,8 @@ import utilities.ReportGenerator;
 @CucumberOptions(
     features = {
         // To run all tests:
-        "features",
+    		"features",
+//    		"features/testCase010.feature",
 //    		"features/testCase011.feature",
 //    		"features/testCase012.feature",
 
