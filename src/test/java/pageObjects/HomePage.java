@@ -12,6 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utilities.WaitUtils;
+
 public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
@@ -68,8 +70,7 @@ public class HomePage extends BasePage {
     }
 
     public void submitSearch(String value) throws InterruptedException {
-//			Thread.sleep(4000);    //remove it
-			
+			WaitUtils.waitForDuration(driver,4);
     		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     		wait.until(ExpectedConditions.visibilityOf(suggestion));
     		for(WebElement w:suggestionList) {
