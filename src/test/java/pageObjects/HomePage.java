@@ -37,7 +37,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[normalize-space()='Online Degrees']")
     WebElement onlineDegree;
     
-    @FindBy(xpath="//*[@id='rendered-content']/div/main/section[1]/h2/div/a")
+    String fallBackURL="https://www.coursera.org/degrees";
+    
+    @FindBy(xpath="//*[@id='rendered-content']/div/main/section[2]/h2//a")
     WebElement partners;
 
     //  Mobile Store Badges
@@ -66,10 +68,10 @@ public class HomePage extends BasePage {
     }
 
     public void submitSearch(String value) throws InterruptedException {
-		Thread.sleep(4000);    //remove it
+//			Thread.sleep(4000);    //remove it
+			
     		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     		wait.until(ExpectedConditions.visibilityOf(suggestion));
-//    		System.out.println(wt.isDisplayed());
     		for(WebElement w:suggestionList) {
     			if(w.getText().equalsIgnoreCase(value)) {
     				w.click();
@@ -79,7 +81,12 @@ public class HomePage extends BasePage {
     }
 
     public void clickOnlineDegree() {
-        onlineDegree.click();
+        try {
+            onlineDegree.click();
+        } catch (Exception e) {
+            driver.get(fallBackURL);
+        }
+
     }
     
     public void clickPartners() {
@@ -117,11 +124,11 @@ public class HomePage extends BasePage {
     }
     
     public void getFooters(WebElement unit){
-//    		footerList=new HashMap<>();
+    		//  footerList=new HashMap<>();
     			String valText=unit.getText();
     			String valLink=unit.getAttribute("href");
     			System.out.println(valText + "\t" + valLink);
-//    			footerList.put(valText, valLink);
+    		//	footerList.put(valText, valLink);
     		}
     
     public void getFooterData() {

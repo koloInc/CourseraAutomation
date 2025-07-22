@@ -55,44 +55,43 @@ public class TestCase006 {
 	}
 
 	@Then("the application should display the purchase summary")
-	public void the_application_should_display_the_purchase_summary() {
+	public void the_application_should_display_the_purchase_summary() throws IOException {
 		utilities.WaitUtils.waitForDuration(driver, 2);
 		String summary = forBusiness.getPurchaseSummary();
 		int rowNo = 1;
 		String expected = xl.getCellData(FileConstants.SHEET_BusinessPlan, 1, 3);
 		String actual = forBusiness.getTotalPrice().replaceAll("[^\\d]", "").trim();
-
+		System.out.println("Actual Amount:"+actual);
 		logger.info("Expected Price: " + expected);
 		logger.info("Actual Price: " + actual);
-
-		try {
-			xl.setCellData(FileConstants.SHEET_BusinessPlan, rowNo, "Actual", actual);
-		} catch (IOException e) {
-			logger.error("Failed to write actual price to Excel", e);
-		}
-
-		String columnName = "Validation";
-		int columnNo = xl.getColumnIndex(FileConstants.SHEET_BusinessPlan, columnName);
 		String status;
 
+
 		try {
-			Assert.assertEquals(actual, expected);
-			status = "Passed";
-			logger.info("Price validation passed.");
-		} catch (AssertionError e) {
-			status = "Failed";
-			logger.warn("Price validation failed: " + e.getMessage());
-
-			// Write to Excel before failing
-			try {
-				xl.setCellData(FileConstants.SHEET_BusinessPlan, rowNo, columnName, status);
-				xl.fillRedColor(FileConstants.SHEET_BusinessPlan, rowNo, columnNo);
-			} catch (IOException ioException) {
-				logger.error("Failed to write failure status to Excel", ioException);
-			}
-
-			throw e;
+		    xl.setCellData(FileConstants.SHEET_BusinessPlan, rowNo, "Actual", actual);
+		
+		    boolean isMatch = actual.equals(expected);
+		    status = isMatch ? "Passed" : "Failed";
+		    logger.info("Price validation " + status.toLowerCase());
+		
+		    xl.setCellData(FileConstants.SHEET_BusinessPlan, rowNo, FileConstants.VALIDATION_COL_NAME, status);
+		
+		    if (isMatch) {
+		        xl.fillGreenColor(FileConstants.SHEET_BusinessPlan, rowNo, FileConstants.VALIDATION_COL);
+		    } else {
+		        xl.fillRedColor(FileConstants.SHEET_BusinessPlan, rowNo, FileConstants.VALIDATION_COL);
+		    }
+		
+		    Assert.assertEquals(expected, actual);
+		
+		} catch (IOException e) {
+		    logger.error("Excel file operation failed", e);
+		    throw new RuntimeException("Excel write failed", e);
+		} catch (AssertionError ae) {
+		    logger.error("Assertion failed", ae);
+		    throw ae;
 		}
+
 
 		String formatted = "\n--- Purchase Summary (TC006) ---\n" + java.time.LocalDateTime.now() + "\n\n" + summary
 				+ "\n" + "=".repeat(80) + "\n";

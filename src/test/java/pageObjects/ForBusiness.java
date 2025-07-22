@@ -73,8 +73,6 @@ public class ForBusiness extends BasePage {
     }
     public String getTotalPrice() {
         String result = totalPrice.getText();
-        //System.out.println("Raw text: [" + result + "]");
-
         return result; 
     }
 

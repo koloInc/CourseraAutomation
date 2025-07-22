@@ -34,7 +34,7 @@ import org.testng.annotations.*;
             "json:test-output/cucumber.json",
             "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
             "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
-           // "rerun:target/rerun.txt",
+            "rerun:target/rerun.txt",
     },
     monochrome = true,
 //    	    dryRun = false,

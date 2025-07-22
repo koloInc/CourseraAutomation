@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import utilities.WaitUtils;
 
 public class ForFooter extends BasePage {
 
@@ -46,7 +51,7 @@ public class ForFooter extends BasePage {
                 String href = link.getAttribute("href");
 
                 ((JavascriptExecutor) driver).executeScript("window.open(arguments[0]);", href);
-                Thread.sleep(2000);
+                WaitUtils.waitForDuration(driver,2);
 
                 Set<String> allWindows = driver.getWindowHandles();
                 for (String window : allWindows) {
@@ -56,7 +61,7 @@ public class ForFooter extends BasePage {
                     }
                 }
 
-                Thread.sleep(3000);
+                WaitUtils.waitForDuration(driver,3);
                 actualTitles.add(driver.getTitle());
                 actualLinks.add(driver.getCurrentUrl());
 

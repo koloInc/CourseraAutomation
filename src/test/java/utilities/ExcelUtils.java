@@ -24,16 +24,6 @@ public class ExcelUtils {
         }
     }
 
-    public int getRowCount(String sheetName) {
-        sheet = wb.getSheet(sheetName);
-        return sheet.getPhysicalNumberOfRows();
-    }
-
-    public int getColumnCount(String sheetName) {
-        sheet = wb.getSheet(sheetName);
-        Row row = sheet.getRow(0);
-        return row.getLastCellNum();
-    }
 
     public String getCellData(String sheetName, int rownum, int columnum) {
         sheet = wb.getSheet(sheetName);
@@ -42,22 +32,6 @@ public class ExcelUtils {
         return formatter.formatCellValue(cell);
     }
     
-    public int getColumnIndex(String sheetName, String columnName) {
-        sheet = wb.getSheet(sheetName);
-        if (sheet == null) return -1;
-
-        Row headerRow = sheet.getRow(0);
-        if (headerRow == null) return -1;
-
-        for (Cell cell : headerRow) {
-            if (cell.getStringCellValue().trim().equalsIgnoreCase(columnName.trim())) {
-                return cell.getColumnIndex();
-            }
-        }
-        return -1;
-    }
-    
-
     public void setCellData(String sheetName, int rowIndex, String columnName, String data) throws IOException {
         sheet = wb.getSheet(sheetName);
         Row headerRow = sheet.getRow(0);
@@ -147,8 +121,6 @@ public class ExcelUtils {
 	 *
 	 *       ExcelUtils es = new ExcelUtils("CourseraAutomationData.xlsx");
 	 *       System.out.println(System.getProperty("user.dir") + "\\src\\test\\resources\\CourseraAutomationData.xlsx");
-	 *       System.out.println("Row Count: " + es.getRowCount("CourseDetails"));
-	 *       System.out.println("Column Cont: " + es.getColumnCount("CourseDetails"));
 	 *       System.out.println("Cell Data: " + es.getCellData("CourseDetails", 0, 1));
 	 *
 	 *		es.setCellData("CourseDetails", 1, "Title", "Doee");
