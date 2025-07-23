@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-//import com.sun.org.apache.bcel.internal.generic.Select;
 
 import utilities.WaitUtils;
 
@@ -74,10 +73,10 @@ public class CareersPage extends BasePage {
     public void filterByCountry(String countryText) throws InterruptedException {
         Select country = new Select(countryDropdown);
     		country.selectByValue(countryText);
-//        Thread.sleep(3000); // wait for table to update
         WaitUtils.waitForDuration(driver, 3);
     }
 
+    /** Not in Use
     public void printJobListings() {
         System.out.println("Job Listings in India:");
         System.out.println("------------------------");
@@ -90,6 +89,7 @@ public class CareersPage extends BasePage {
             System.out.println();
         }
     }
+    **/
     
     public List<Map<String, String>> getJobListings() {
         List<Map<String, String>> jobList = new ArrayList<>();

@@ -43,6 +43,10 @@ public class FileConstants {
     //For Card Details 5
     public static final String COL_CARD_DETAILS="Card Details";
     
+    //For 6
+    public static final int VALIDATION_COL=5;
+    public static final String VALIDATION_COL_NAME="Validation";
+    
     // For course detailed info 7
     public static final int COL_COURSE_POS= 0;
     public static final String COL_COURSE_TITLE= "Title";
@@ -67,6 +71,12 @@ public class FileConstants {
     public static final int ROW_CHILD_WINDOW = 2;
     public static final int ROW_CHILD_TITLE = 3;
 
+    //For 11
+    public static final int EXPECTED_TITLE = 0;
+    public static final int EXPECTED_LINK = 3;
+    
+    public static final int TITLE_VALIDATION = 2;
+    public static final int LINK_VALIDATION= 5;
    
     // Excel File Path
     public static final String EXCEL_FILE = "CourseraAutomationData.xlsx";

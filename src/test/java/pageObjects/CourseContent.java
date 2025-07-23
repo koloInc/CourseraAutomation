@@ -26,7 +26,7 @@ public class CourseContent extends BasePage{
 	WebElement courseTitle;
 	
 	//getting frame
-	@FindBy(xpath="//div[@class='css-2qp4i2 cds-168']")
+	@FindBy(xpath="//*[@id='rendered-content']//*[contains(@class, 'css-2qp4i2') ]")
 	WebElement ele;
 	
 	//getting no. of module

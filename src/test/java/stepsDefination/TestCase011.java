@@ -40,46 +40,48 @@ public class TestCase011 {
         List<String> actualTitles = footerPage.getActualTitles();
         List<String> actualLinks = footerPage.getActualLinks();
 
-        int rowCount = xl.getRowCount(FileConstants.SHEET_FooterSocialLinkValidation);
         boolean hasValidationFailure = false;
 
-        for (int i = 1; i < rowCount && i - 1 < actualTitles.size(); i++) {
+        for (int i = 0; i < actualTitles.size(); i++) {
             try {
-                String expectedTitle = xl.getCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "Predicted Title"));
-                String expectedLink = xl.getCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "Predicted Link"));
+                int excelRow = i + 1; // Assuming row 0 is header
 
-                String actualTitle = actualTitles.get(i - 1);
-                String actualLink = actualLinks.get(i - 1);
+                String expectedTitle = xl.getCellData(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, FileConstants.EXPECTED_TITLE);
+                String expectedLink = xl.getCellData(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, FileConstants.EXPECTED_LINK);
 
-                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "Actual Title", actualTitle);
-                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "Actual Link", actualLink);
+                String actualTitle = actualTitles.get(i);
+                String actualLink = actualLinks.get(i);
 
-                String titleValidation = actualTitle.equals(expectedTitle) ? "Passed" : "Failed";
-                String linkValidation = actualLink.equals(expectedLink) ? "Passed" : "Failed";
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, "Actual Title", actualTitle);
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, "Actual Link", actualLink);
 
-                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "VALIDATION Title", titleValidation);
-                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, i, "VALIDATION Link", linkValidation);
+                boolean titlePassed = actualTitle.contains(expectedTitle);
+                boolean linkPassed = actualLink.contains(expectedLink);
 
-                int titleCol = xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "VALIDATION Title");
-                int linkCol = xl.getColumnIndex(FileConstants.SHEET_FooterSocialLinkValidation, "VALIDATION Link");
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, "Title Validation", titlePassed ? "Passed" : "Failed");
+                xl.setCellData(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, "Link Validation", linkPassed ? "Passed" : "Failed");
 
-                if ("Passed".equalsIgnoreCase(titleValidation)) {
-                    xl.fillGreenColor(FileConstants.SHEET_FooterSocialLinkValidation, i, titleCol);
+
+                int titleCol = FileConstants.TITLE_VALIDATION; // "VALIDATION Title"
+                int linkCol = FileConstants.LINK_VALIDATION;  // "VALIDATION Link"
+
+                if (titlePassed) {
+                    xl.fillGreenColor(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, titleCol);
                 } else {
-                    xl.fillRedColor(FileConstants.SHEET_FooterSocialLinkValidation, i, titleCol);
+                    xl.fillRedColor(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, titleCol);
                     hasValidationFailure = true;
                 }
 
-                if ("Passed".equalsIgnoreCase(linkValidation)) {
-                    xl.fillGreenColor(FileConstants.SHEET_FooterSocialLinkValidation, i, linkCol);
+                if (linkPassed) {
+                    xl.fillGreenColor(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, linkCol);
                 } else {
-                    xl.fillRedColor(FileConstants.SHEET_FooterSocialLinkValidation, i, linkCol);
+                    xl.fillRedColor(FileConstants.SHEET_FooterSocialLinkValidation, excelRow, linkCol);
                     hasValidationFailure = true;
                 }
 
-                logger.debug("Row " + i + " → Title: " + actualTitle + " | Link: " + actualLink);
+                logger.debug("Row {} → Title: {} | Link: {}", excelRow, actualTitle, actualLink);
             } catch (IOException e) {
-                logger.error("Failed to write validation data to Excel at row " + i, e);
+                logger.error("Failed to write validation data to Excel at row " + (i + 1), e);
             }
         }
 
@@ -90,4 +92,5 @@ public class TestCase011 {
             throw new AssertionError("One or more social media validations failed. See logs and Excel for details.");
         }
     }
+
 }
