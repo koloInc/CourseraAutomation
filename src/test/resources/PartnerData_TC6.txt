@@ -1,0 +1,80 @@
+
+--- Purchase Summary (TC006) ---
+2025-07-24T23:14:54.589130200
+
+Purchase Summary
+Selected subscription
+Team plan (price per user per year)
+$319
+Number of users
+x 10
+Total
+$3,190
+Annual Payment
+Annual total
+$3,190
+Today's Payment
+$3,190
+14-day refund guarantee
+================================================================================
+
+
+--- Purchase Summary (TC006) ---
+2025-07-24T23:22:39.704697800
+
+Purchase Summary
+Selected subscription
+Team plan (price per user per year)
+$319
+Number of users
+x 10
+Total
+$3,190
+Annual Payment
+Annual total
+$3,190
+Today's Payment
+$3,190
+14-day refund guarantee
+================================================================================
+
+
+--- Purchase Summary (TC006) ---
+2025-07-25T08:36:13.140004200
+
+Purchase Summary
+Selected subscription
+Team plan (price per user per year)
+$319
+Number of users
+x 10
+Total
+$3,190
+Annual Payment
+Annual total
+$3,190
+Today's Payment
+$3,190
+14-day refund guarantee
+================================================================================
+
+
+--- Purchase Summary (TC006) ---
+2025-07-25T12:01:33.124660100
+
+Purchase Summary
+Selected subscription
+Team plan (price per user per year)
+$319
+Number of users
+x 10
+Total
+$3,190
+Annual Payment
+Annual total
+$3,190
+Today's Payment
+$3,190
+14-day refund guarantee
+================================================================================
+
